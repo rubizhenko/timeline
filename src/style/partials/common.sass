@@ -29,6 +29,36 @@ body
 		justify-content: center
 		+nlt
 			border-right: 1px solid black
+		&--head
+			z-index: 11
+			background: white
 	&__cells-wrap
-		overflow: hidden
 		position: relative
+		flex-grow: 1
+	&__action
+		background: #cccccc
+		position: absolute
+		top: 5px
+		max-height: 40px
+		transition: all .3s
+		cursor: pointer
+		border-radius: 25px
+		overflow: hidden
+		border: 1px solid white
+		&:hover
+			z-index: 10
+			max-width: 500px !important
+			max-height: 500px !important
+			background: #bbbbbb
+
+		&-content
+			padding: 5px 15px
+			+text-overflow
+
+.success
+	background: green !important
+	color: white
+	
+
+.warning
+	background: orange !important

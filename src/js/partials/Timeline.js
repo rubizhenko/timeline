@@ -6,6 +6,7 @@ const Timeline = (function() {
     source: "json",
     place: $("#timeline-wrap"),
     search: false,
+    cellWidth: 100,
     rows: [],
     daysBefore: 3,
     viewDates: 7,
@@ -58,15 +59,74 @@ const Timeline = (function() {
       return numberStr;
     },
 
-    renderRow: function(place, datesArray, data, rowHead, rowAction) {
+    renderRow: function(place, datesArray, headHTML, actionsHTML) {
+      // create table row
       const row = $('<div class="timeline__row">');
       place.append(row);
-      const headCell = $('<div class="timeline__cell">');
-      row.append(headCell);
-      console.log(rowHead);
 
+      // create head cell
+      const headCell = $('<div class="timeline__cell timeline__cell--head">');
+      row.append(headCell);
+
+      // create cells wrapper
       const cellsWrap = $('<div class="timeline__cells-wrap">');
       row.append(cellsWrap);
+
+      headCell.html(headHTML);
+      cellsWrap.html(actionsHTML);
+    },
+    getRowActions: function(row, actionsTemplate, actionsAttrs) {
+      const actionsHTML = row.actions.map(action => {
+        const from = moment(action.dates[0])._d.getDate();
+        const to = moment(action.dates[1])._d.getDate();
+
+        const nowDate = setting.now.getDate();
+        const { type } = action;
+        const left = (from - nowDate) * setting.cellWidth;
+        const maxWidth = (to - from) * setting.cellWidth;
+
+        let style = `style="left: ${left}px; max-width: ${maxWidth}px; width: ${maxWidth}px"`;
+
+        let attrs = style;
+        if (type) {
+          const attrsObj = actionsAttrs[type];
+          attrs +=
+            " " +
+            Object.keys(attrsObj)
+              .map(attr => {
+                const attrVal = attrsObj[attr];
+                const attribute =
+                  attr === "class"
+                    ? `${attr}="timeline__action ${attrVal}"`
+                    : `${attr}="${attrVal}"`;
+                return attribute;
+              })
+              .join(" ");
+        }
+
+        return `<div ${attrs}>
+        <div class="timeline__action-content">
+          ${actionsTemplate(action)}
+        </div>
+        </div>`;
+      });
+      return actionsHTML;
+    },
+    renderTable: function(place, data, datesArray, rowHead, rowAction) {
+      const headTemplate = rowHead.template;
+      const actionsTemplate = rowAction.template;
+      const actionsAttrs = rowAction.attrsFromType;
+      data.map(item => {
+        const headHTML = headTemplate(item);
+
+        const actionsHTML = Timeline.getRowActions(
+          item,
+          actionsTemplate,
+          actionsAttrs
+        );
+
+        Timeline.renderRow(place, datesArray, headHTML, actionsHTML);
+      });
     },
     init: function(props) {
       if (props) {
@@ -77,28 +137,7 @@ const Timeline = (function() {
       const { source, render, place } = setting;
 
       const { rowHead, rowAction } = render;
-      Timeline.renderRow(place, dates, source, rowHead, rowAction);
-      // const tableHtml = source
-      //   .map(item => {
-      //     const rowHTML = render
-      //       .map(row => {
-      //         const cellVal = item[field];
-      //         if (template) {
-      //           const templateRow = template(item);
-      //           if (templateRow) {
-      //             return `<div class="timeline__cell"><div class="timeline__cell-content">${template(
-      //               item
-      //             )}</div></div>`;
-      //           }
-      //         }
-      //         return `<div class="timeline__cell"><div class="timeline__cell-content">${cellTitle} ${cellVal}</div></div>`;
-      //       })
-      //       .join("");
-      //     return `<div class="timeline__row">${rowHTML}</div>`;
-      //   })
-      //   .join("");
-
-      // place.html(tableHtml);
+      Timeline.renderTable(place, source, dates, rowHead, rowAction);
     }
   };
 })();

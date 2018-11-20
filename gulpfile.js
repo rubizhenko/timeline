@@ -95,6 +95,11 @@ gulp.task("html:build", function() {
     .src(path.src.html)
     .pipe(include())
     .pipe(htmlmin({ collapseWhitespace: true }))
+    .on("error", function(err) {
+      console.log(err.toString());
+
+      this.emit("end");
+    })
     .pipe(gulp.dest(path.build.html))
     .pipe(
       reload({
@@ -187,6 +192,11 @@ gulp.task("js:build", function() {
         }
       })
     )
+    .on("error", function(err) {
+      console.log(err.toString());
+
+      this.emit("end");
+    })
     .pipe(gulp.dest(path.build.js))
     .pipe(
       reload({

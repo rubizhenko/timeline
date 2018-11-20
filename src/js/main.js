@@ -10,13 +10,13 @@ const carsArray = [
       {
         type: 1,
         title: "Car rent",
-        dates: "10-12-2018 - 15-12-2018",
+        dates: ["2018-11-19T01:00:00", "2018-11-23T01:00:00"],
         cost: "124$"
       },
       {
         type: 2,
         title: "Car repair",
-        dates: "17-12-2018 - 18-12-2018",
+        dates: ["2018-11-24T01:00:00", "2018-11-25T01:00:00"],
         cost: "500$"
       }
     ]
@@ -28,13 +28,13 @@ const carsArray = [
       {
         type: 1,
         title: "Car rent",
-        dates: "10-12-2018 - 15-12-2018",
+        dates: ["2018-11-22T01:00:00", "2018-11-26T01:00:00"],
         cost: "124$"
       },
       {
         type: 2,
         title: "Car repair",
-        dates: "17-12-2018 - 18-12-2018",
+        dates: ["2018-11-26T01:00:00", "2018-11-30T01:00:00"],
         cost: "500$"
       }
     ]
@@ -45,17 +45,24 @@ $(document).ready(function() {
   Timeline.init({
     source: carsArray,
     search: $("#search"),
+    cellWidth: 100,
     render: {
       rowHead: {
-        field: "id",
         template: function(row) {
           return `${row.title}<br/>${row.id}`;
         }
       },
       rowAction: {
-        field: "actions",
-        template: function(row) {
-          return `${row.title}<br/>${row.id}`;
+        //Attributes for timeline__action from type field
+        attrsFromType: {
+          1: { class: "success" },
+          2: { class: "warning" }
+        },
+        template: function(action) {
+          const { title, dates, cost } = action;
+          const from = dates[0];
+          const to = dates[1];
+          return `<b>${title}</b><div>${from}<br> ${to}</div><br/>${cost}`;
         }
       }
     }
