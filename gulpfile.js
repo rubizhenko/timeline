@@ -30,7 +30,7 @@ var path = {
     html: "src/*.html",
     js: "src/js/*.js",
     jsLib: "src/js/lib/*.js",
-    json: "src/json/*.json",
+    json: "src/json/**/*.json",
     style: "src/style/*.sass",
     img: "src/img/**/*.*",
     svg: "src/svg/*.svg",
@@ -66,6 +66,7 @@ var path = {
   watch: {
     html: "src/**/*.html",
     js: "src/js/**/*.js",
+    json: "src/json/**/*.json",
     style: "src/style/**/*.+(scss|sass|css)",
     img: "src/img/**/*.+(jpg|jpeg|png|gif|ico)",
     sprite: "src/sprite/**/*.+(jpg|jpeg|png)",
@@ -164,24 +165,25 @@ gulp.task("js:build", function() {
               query: {
                 presets: ["env"]
               }
-            },
-            //for importing snapSVG
-            {
-              test: require.resolve("snapsvg/dist/snap.svg.js"),
-              use: "imports-loader?this=>window,fix=>module.exports=0"
             }
+            //for importing snapSVG
+            // {
+            //   test: require.resolve("snapsvg/dist/snap.svg.js"),
+            //   use: "imports-loader?this=>window,fix=>module.exports=0"
+            // }
             //END: for importing snapSVG
           ]
         },
         //for importing snapSVG
-        resolve: {
-          alias: {
-            snapsvg: "snapsvg/dist/snap.svg.js"
-          }
-        },
+        // resolve: {
+        //   alias: {
+        //     snapsvg: "snapsvg/dist/snap.svg.js"
+        //   }
+        // },
         //END:for importing snapSVG
         externals: {
-          jquery: "jQuery"
+          jquery: "jQuery",
+          moment: "moment"
         }
       })
     )
@@ -209,24 +211,25 @@ gulp.task("js:deploy", function() {
               query: {
                 presets: ["env"]
               }
-            },
-            //for importing snapSVG
-            {
-              test: require.resolve("snapsvg/dist/snap.svg.js"),
-              use: "imports-loader?this=>window,fix=>module.exports=0"
             }
+            //for importing snapSVG
+            // {
+            //   test: require.resolve("snapsvg/dist/snap.svg.js"),
+            //   use: "imports-loader?this=>window,fix=>module.exports=0"
+            // }
             //END: for importing snapSVG
           ]
         },
         //for importing snapSVG
-        resolve: {
-          alias: {
-            snapsvg: "snapsvg/dist/snap.svg.js"
-          }
-        },
+        // resolve: {
+        //   alias: {
+        //     snapsvg: "snapsvg/dist/snap.svg.js"
+        //   }
+        // },
         //END:for importing snapSVG
         externals: {
-          jquery: "jQuery"
+          jquery: "jQuery",
+          moment: "moment"
         }
       })
     )
@@ -438,6 +441,7 @@ gulp.task("build", [
   "html:build",
   "favicon:build",
   "js:build",
+  "json:build",
   "js-lib:build",
   "json:build",
   "style:build",
@@ -454,6 +458,7 @@ gulp.task("deploy", [
   "html:deploy",
   "favicon:deploy",
   "js:deploy",
+  "json:deploy",
   "js-lib:deploy",
   "json:deploy",
   "style:deploy",
@@ -479,6 +484,9 @@ gulp.task("watch", function() {
   });
   watch([path.watch.js], function(event, cb) {
     gulp.start("js-lib:build");
+  });
+  watch([path.watch.json], function(event, cb) {
+    gulp.start("json:build");
   });
   watch([path.watch.svg], function(event, cb) {
     gulp.start("svg:build");

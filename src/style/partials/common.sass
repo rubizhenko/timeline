@@ -10,3 +10,25 @@ body
 	&::before
 		display: block
 
+
+.timeline
+	border: 1px solid black
+	&__row
+		display: flex
+		width: 100%
+		position: relative
+		+nlt
+			.timeline__cell
+				border-bottom: 1px solid black
+	&__cell
+		min-width: 100px
+		min-height: 50px
+		text-align: center
+		display: flex
+		align-items: center
+		justify-content: center
+		+nlt
+			border-right: 1px solid black
+	&__cells-wrap
+		overflow: hidden
+		position: relative
