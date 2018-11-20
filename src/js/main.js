@@ -28,13 +28,19 @@ const carsArray = [
       {
         type: 1,
         title: "Car rent",
-        dates: ["2018-11-22T01:00:00", "2018-11-26T01:00:00"],
+        dates: ["2018-11-22T01:00:00", "2018-11-25T01:00:00"],
         cost: "124$"
       },
       {
         type: 2,
         title: "Car repair",
         dates: ["2018-11-26T01:00:00", "2018-11-30T01:00:00"],
+        cost: "500$"
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T01:00:00", "2018-12-02T01:00:00"],
         cost: "500$"
       }
     ]
@@ -54,15 +60,17 @@ $(document).ready(function() {
       },
       rowAction: {
         //Attributes for timeline__action from type field
-        attrsFromType: {
+        // $ - replace to row index
+        attrsForType: {
           1: { class: "success" },
-          2: { class: "warning" }
+          2: { class: "warning", id: "asd-$" },
+          3: { class: "brand" }
         },
         template: function(action) {
           const { title, dates, cost } = action;
           const from = dates[0];
           const to = dates[1];
-          return `<b>${title}</b><div>${from}<br> ${to}</div><br/>${cost}`;
+          return `<b>${title}</b><div>${from}${to}</div><br/>${cost}`;
         }
       }
     }

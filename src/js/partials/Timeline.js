@@ -6,10 +6,10 @@ const Timeline = (function() {
     source: "json",
     place: $("#timeline-wrap"),
     search: false,
-    cellWidth: 100,
+    cellWidth: 50,
     rows: [],
-    daysBefore: 3,
-    viewDates: 7,
+    daysBefore: 20,
+    viewDates: 22,
     now: new Date()
   };
   return {
@@ -58,75 +58,92 @@ const Timeline = (function() {
       }
       return numberStr;
     },
-
-    renderRow: function(place, datesArray, headHTML, actionsHTML) {
-      // create table row
-      const row = $('<div class="timeline__row">');
-      place.append(row);
-
-      // create head cell
-      const headCell = $('<div class="timeline__cell timeline__cell--head">');
-      row.append(headCell);
-
-      // create cells wrapper
-      const cellsWrap = $('<div class="timeline__cells-wrap">');
-      row.append(cellsWrap);
-
-      headCell.html(headHTML);
-      cellsWrap.html(actionsHTML);
+    div: function(val, by) {
+      return (val - (val % by)) / by;
     },
-    getRowActions: function(row, actionsTemplate, actionsAttrs) {
-      const actionsHTML = row.actions.map(action => {
-        const from = moment(action.dates[0])._d.getDate();
-        const to = moment(action.dates[1])._d.getDate();
 
-        const nowDate = setting.now.getDate();
-        const { type } = action;
-        const left = (from - nowDate) * setting.cellWidth;
-        const maxWidth = (to - from) * setting.cellWidth;
+    getRow: function(datesArray, actionsHTML) {
+      // create table row
+      let row = `<div class="timeline__row"><div class="timeline__cell-wrap">`;
 
-        let style = `style="left: ${left}px; max-width: ${maxWidth}px; width: ${maxWidth}px"`;
+      for (let i = 0; i < datesArray.length; i++) {
+        const cellDay =
+          '<div class="timeline__cell timeline__cell--half"></div><div class="timeline__cell"></div>';
 
-        let attrs = style;
-        if (type) {
-          const attrsObj = actionsAttrs[type];
-          attrs +=
-            " " +
-            Object.keys(attrsObj)
-              .map(attr => {
-                const attrVal = attrsObj[attr];
-                const attribute =
-                  attr === "class"
-                    ? `${attr}="timeline__action ${attrVal}"`
-                    : `${attr}="${attrVal}"`;
-                return attribute;
-              })
-              .join(" ");
-        }
+        row += cellDay;
+      }
+      row += `</div>${actionsHTML}</div>`;
 
-        return `<div ${attrs}>
+      return row;
+    },
+    getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
+      const actionsHTML = row.actions
+        .map(action => {
+          const from = moment(action.dates[0]);
+          const to = moment(action.dates[1]);
+
+          const duration = moment.duration(to.diff(from)).asHours();
+          const actionStart = moment.duration(from.diff(setting.now)).asHours();
+
+          const { type } = action;
+          const left = Timeline.div(actionStart, 12) * setting.cellWidth;
+          const maxWidth = Timeline.div(duration, 12) * setting.cellWidth - 2;
+
+          let style = `style="left: ${left}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
+
+          let attrs = style;
+          if (type) {
+            const attrsObj = actionsAttrs[type];
+            attrs +=
+              " " +
+              Object.keys(attrsObj)
+                .map(attr => {
+                  const attrVal = attrsObj[attr];
+                  const attribute =
+                    attr === "class"
+                      ? `${attr}="timeline__action ${attrVal}"`
+                      : `${attr}="${attrVal.replace("$", rowId)}"`;
+                  return attribute;
+                })
+                .join(" ");
+          }
+
+          return `<div ${attrs}>
         <div class="timeline__action-content">
           ${actionsTemplate(action)}
         </div>
         </div>`;
-      });
+        })
+        .join("");
       return actionsHTML;
     },
     renderTable: function(place, data, datesArray, rowHead, rowAction) {
-      const headTemplate = rowHead.template;
+      const titlesTemplate = rowHead.template;
       const actionsTemplate = rowAction.template;
-      const actionsAttrs = rowAction.attrsFromType;
-      data.map(item => {
-        const headHTML = headTemplate(item);
+      const actionsAttrs = rowAction.attrsForType;
+      const rowWidth = datesArray.length * setting.cellWidth;
+      let tableHeadHTML = "";
+      let tableBodyHTML = "";
+      let tableHTML = "";
+      data.map((item, id) => {
+        tableHeadHTML += `<div class="timeline__row">${titlesTemplate(
+          item
+        )}</div>`;
 
         const actionsHTML = Timeline.getRowActions(
           item,
+          id,
           actionsTemplate,
           actionsAttrs
         );
-
-        Timeline.renderRow(place, datesArray, headHTML, actionsHTML);
+        tableBodyHTML += Timeline.getRow(datesArray, actionsHTML);
       });
+
+      tableHTML =
+        `<div class="timeline__head">${tableHeadHTML}</div>` +
+        `<div class="timeline__body"><div class="timeline__body-wrap" style="width:${rowWidth}px">${tableBodyHTML}</div></div>`;
+
+      place.html(tableHTML);
     },
     init: function(props) {
       if (props) {

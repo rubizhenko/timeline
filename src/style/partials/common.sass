@@ -13,28 +13,39 @@ body
 
 .timeline
 	border: 1px solid black
+	overflow: hidden
+	display: flex
+	&__head
+		flex-shrink: 0
+		width: 200px
+		background: white
+		.timeline__row
+			border-right: 1px solid black
+			border-bottom: 1px solid black
+			display: flex
+			align-items: center
+			justify-content: center
+			text-align: center
+	&__body
+		overflow-x: auto
+	&__body-wrap
+		padding-bottom: 100px
+		overflow: hidden
 	&__row
-		display: flex
-		width: 100%
 		position: relative
-		+nlt
-			.timeline__cell
-				border-bottom: 1px solid black
-	&__cell
-		min-width: 100px
-		min-height: 50px
-		text-align: center
+		height: 50px
 		display: flex
-		align-items: center
-		justify-content: center
+		.timeline__cell
+			border-bottom: 1px solid black
+	&__cell
+		min-width: 50px
+		height: 100%
+		text-align: center
+		float: left
 		+nlt
 			border-right: 1px solid black
-		&--head
-			z-index: 11
-			background: white
-	&__cells-wrap
-		position: relative
-		flex-grow: 1
+		&.timeline__cell--half
+				border-right: 1px solid #cccccc
 	&__action
 		background: #cccccc
 		position: absolute
@@ -44,21 +55,47 @@ body
 		cursor: pointer
 		border-radius: 25px
 		overflow: hidden
-		border: 1px solid white
+		z-index: 9
+		padding: 5px 15px
+		opacity: .8
 		&:hover
 			z-index: 10
 			max-width: 500px !important
 			max-height: 500px !important
-			background: #bbbbbb
-
+			opacity: 1
+			&::after
+				transform: translateY(100%)
 		&-content
-			padding: 5px 15px
 			+text-overflow
+		&::after
+			content: ''
+			width: 100%
+			height: 40px
+			position: absolute
+			z-index: 1
+			left: 0
+			right: 0
+			bottom: 0
+			background: linear-gradient(rgba(255,255,255,.0001) 10%, white)
+			transition: all .3s
+
 
 .success
-	background: green !important
+	background: green
 	color: white
-	
+	&::after
+		background: linear-gradient(rgba(255,255,255,.0001) 10%, green)
+
 
 .warning
-	background: orange !important
+	background: orange
+	&::after
+		background: linear-gradient(rgba(255,255,255,.0001) 10%, orange)
+
+
+
+.brand
+	background: blue
+	color: white
+	&::after
+		background: linear-gradient(rgba(255,255,255,.0001) 10%, blue)
