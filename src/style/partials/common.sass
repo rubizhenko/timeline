@@ -10,42 +10,65 @@ body
 	&::before
 		display: block
 
+$borderColor: #ececec
+$borderWeight: 2px
+$border: $borderWeight solid $borderColor
 
+$headRowHeight: 40px
 .timeline
-	border: 1px solid black
+	border: $border
 	overflow: hidden
 	display: flex
 	&__head
 		flex-shrink: 0
 		width: 200px
 		background: white
+		padding-top: $headRowHeight
+		border-right: $border
 		.timeline__row
-			border-right: 1px solid black
-			border-bottom: 1px solid black
 			display: flex
 			align-items: center
 			justify-content: center
 			text-align: center
+			border-bottom: $border
+			&:first-of-type
+				border-top: $border
+
 	&__body
 		overflow-x: auto
 	&__body-wrap
-		padding-bottom: 100px
 		overflow: hidden
+		border-right: $border
 	&__row
 		position: relative
 		height: 50px
 		display: flex
 		.timeline__cell
-			border-bottom: 1px solid black
+			border-bottom: $border
+	&__row-head
+		height: $headRowHeight
+		display: flex
+		.timeline__cell
+			display: flex
+			align-items: center
+			text-align: center
+			justify-content: center
+			flex-shrink: 0
+			border-bottom: $border
+			box-sizing: content-box
+	&__cell-wrap
+		display: flex
+
 	&__cell
-		min-width: 50px
 		height: 100%
 		text-align: center
 		float: left
+		b
+			font-weight: bold
 		+nlt
-			border-right: 1px solid black
+			border-right: $border
 		&.timeline__cell--half
-				border-right: 1px solid #cccccc
+				border-right: 1px solid lighten($borderColor, 2%)
 	&__action
 		background: #cccccc
 		position: absolute
@@ -57,8 +80,7 @@ body
 		overflow: hidden
 		z-index: 9
 		padding: 5px 15px
-		opacity: .8
-		&:hover
+		&.is-open
 			z-index: 10
 			max-width: 500px !important
 			max-height: 500px !important
@@ -67,6 +89,8 @@ body
 				transform: translateY(100%)
 		&-content
 			+text-overflow
+			display: flex
+			align-items: center
 		&::after
 			content: ''
 			width: 100%
@@ -81,21 +105,34 @@ body
 
 
 .success
-	background: green
+	background: #24ca24
 	color: white
 	&::after
-		background: linear-gradient(rgba(255,255,255,.0001) 10%, green)
+		background: linear-gradient(rgba(255,255,255,.0001) 10%, #008800)
 
 
 .warning
-	background: orange
+	background: #f3bf02
 	&::after
-		background: linear-gradient(rgba(255,255,255,.0001) 10%, orange)
+		background: linear-gradient(rgba(255,255,255,.0001) 10%, #f99500)
 
 
 
 .brand
-	background: blue
+	background: #12b8de
 	color: white
 	&::after
-		background: linear-gradient(rgba(255,255,255,.0001) 10%, blue)
+		background: linear-gradient(rgba(255,255,255,.0001) 10%, #096aaf)
+
+.bold
+	font-weight: bold
+
+.mb-5
+	display: inline-block
+	margin-bottom: 5px
+
+.left-vis
+	left: 0 !important
+
+.dates
+	padding: 0 10px

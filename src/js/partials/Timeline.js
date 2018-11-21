@@ -8,8 +8,8 @@ const Timeline = (function() {
     search: false,
     cellWidth: 50,
     rows: [],
-    daysBefore: 20,
-    viewDates: 22,
+    daysBefore: 0,
+    viewDates: 15,
     now: new Date()
   };
   return {
@@ -61,14 +61,30 @@ const Timeline = (function() {
     div: function(val, by) {
       return (val - (val % by)) / by;
     },
+    getDatesRow: function(datesArray) {
+      // create table row head
+      let rowHead = '<div class="timeline__row-head">';
+      const cellWidth = setting.cellWidth * 2 - 2;
+      for (let i = 0; i < datesArray.length; i++) {
+        const cellDay = `<div class="timeline__cell" style="width:${cellWidth}px">${moment(
+          datesArray[i]
+        ).format("DD.MM")}<br>${moment(datesArray[i]).format("ddd")}</div>`;
 
+        rowHead += cellDay;
+      }
+      rowHead += "</div>";
+      return rowHead;
+    },
     getRow: function(datesArray, actionsHTML) {
       // create table row
       let row = `<div class="timeline__row"><div class="timeline__cell-wrap">`;
 
       for (let i = 0; i < datesArray.length; i++) {
-        const cellDay =
-          '<div class="timeline__cell timeline__cell--half"></div><div class="timeline__cell"></div>';
+        const cellDay = `<div class="timeline__cell timeline__cell--half" style="width: ${
+          setting.cellWidth
+        }px"></div><div class="timeline__cell" style="width: ${
+          setting.cellWidth
+        }px"></div>`;
 
         row += cellDay;
       }
@@ -77,17 +93,30 @@ const Timeline = (function() {
       return row;
     },
     getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
+      const hourWidth = (setting.cellWidth / 12).toFixed(2);
+
       const actionsHTML = row.actions
         .map(action => {
           const from = moment(action.dates[0]);
           const to = moment(action.dates[1]);
 
-          const duration = moment.duration(to.diff(from)).asHours();
-          const actionStart = moment.duration(from.diff(setting.now)).asHours();
+          const duration = moment
+            .duration(to.diff(from))
+            .asHours()
+            .toFixed(2);
+          const actionStart =
+            moment
+              .duration(from.diff(setting.now))
+              .asHours()
+              .toFixed(2) + setting.now.getHours();
 
           const { type } = action;
-          const left = Timeline.div(actionStart, 12) * setting.cellWidth;
-          const maxWidth = Timeline.div(duration, 12) * setting.cellWidth - 2;
+
+          const left =
+            (+actionStart + setting.now.getHours()) * hourWidth +
+            setting.daysBefore * setting.cellWidth * 2;
+
+          const maxWidth = duration * hourWidth;
 
           let style = `style="left: ${left}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
 
@@ -101,7 +130,7 @@ const Timeline = (function() {
                   const attrVal = attrsObj[attr];
                   const attribute =
                     attr === "class"
-                      ? `${attr}="timeline__action ${attrVal}"`
+                      ? `${attr}="timeline__action ${attrVal} js_timeline-action"`
                       : `${attr}="${attrVal.replace("$", rowId)}"`;
                   return attribute;
                 })
@@ -121,10 +150,14 @@ const Timeline = (function() {
       const titlesTemplate = rowHead.template;
       const actionsTemplate = rowAction.template;
       const actionsAttrs = rowAction.attrsForType;
-      const rowWidth = datesArray.length * setting.cellWidth;
+      const rowWidth = datesArray.length * setting.cellWidth * 2;
       let tableHeadHTML = "";
       let tableBodyHTML = "";
       let tableHTML = "";
+
+      const datesRow = Timeline.getDatesRow(datesArray);
+      tableBodyHTML += datesRow;
+
       data.map((item, id) => {
         tableHeadHTML += `<div class="timeline__row">${titlesTemplate(
           item
@@ -139,11 +172,68 @@ const Timeline = (function() {
         tableBodyHTML += Timeline.getRow(datesArray, actionsHTML);
       });
 
+      tableBodyHTML += datesRow;
+
       tableHTML =
         `<div class="timeline__head">${tableHeadHTML}</div>` +
         `<div class="timeline__body"><div class="timeline__body-wrap" style="width:${rowWidth}px">${tableBodyHTML}</div></div>`;
 
       place.html(tableHTML);
+    },
+
+    events: function() {
+      $(document).on("click", ".js_timeline-action", function(e) {
+        e.preventDefault();
+        const _this = $(this);
+        const actions = $(".js_timeline-action");
+        actions.removeClass("is-open");
+        actions.removeClass("left-vis");
+        _this.addClass("is-open");
+
+        const left = _this.css("left");
+        const leftVal = parseInt(left);
+        if (leftVal < 0) {
+          _this.addClass("left-vis");
+        }
+      });
+
+      $(".js_add-prev-day").click(function() {
+        setting.daysBefore += 1;
+        Timeline.reinit();
+      });
+      $(".js_remove-prev-day").click(function() {
+        setting.daysBefore -= 1;
+        Timeline.reinit();
+      });
+      $(".js_week1").click(function() {
+        setting.viewDates = 7;
+        Timeline.reinit();
+      });
+      $(".js_week2").click(function() {
+        setting.viewDates = 14;
+        Timeline.reinit();
+      });
+      $(".js_month").click(function() {
+        setting.viewDates = 30;
+        Timeline.reinit();
+      });
+      // Hide open action
+      $(document).on("click", function(e) {
+        const target = $(e.target);
+        if (!target.hasClass("js_timeline-action")) {
+          const actions = $(".js_timeline-action");
+          actions.removeClass("is-open");
+          actions.removeClass("left-vis");
+        }
+      });
+    },
+    reinit: function() {
+      const dates = this.getDaysArray();
+
+      const { source, render, place } = setting;
+
+      const { rowHead, rowAction } = render;
+      Timeline.renderTable(place, source, dates, rowHead, rowAction);
     },
     init: function(props) {
       if (props) {
@@ -155,6 +245,8 @@ const Timeline = (function() {
 
       const { rowHead, rowAction } = render;
       Timeline.renderTable(place, source, dates, rowHead, rowAction);
+
+      Timeline.events();
     }
   };
 })();

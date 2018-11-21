@@ -6,17 +6,56 @@ const carsArray = [
   {
     id: "123123131",
     title: "Honda Civic",
+    group: "sedan",
     actions: [
       {
         type: 1,
         title: "Car rent",
-        dates: ["2018-11-19T01:00:00", "2018-11-23T01:00:00"],
+        dates: ["2018-11-18T15:40:00", "2018-11-24T00:00:00"],
         cost: "124$"
       },
       {
         type: 2,
         title: "Car repair",
-        dates: ["2018-11-24T01:00:00", "2018-11-25T01:00:00"],
+        dates: ["2018-11-24T15:40:00", "2018-11-25T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },
+  {
+    id: "55123",
+    title: "Toyota Camry",
+    group: "sedan",
+    actions: [
+      {
+        type: 3,
+        title: "Car repair",
+        dates: ["2018-11-20T15:40:00", "2018-11-22T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-23T15:40:00", "2018-11-25T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },
+  {
+    id: "44125",
+    title: "Bugatti Veyron",
+    group: "SportCar",
+    actions: [
+      {
+        type: 2,
+        title: "Car rent",
+        dates: ["2018-11-23T15:40:00", "2018-11-28T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 3,
+        title: "Car repair",
+        dates: ["2018-11-28T15:40:00", "2018-11-29T15:40:00"],
         cost: "500$"
       }
     ]
@@ -24,38 +63,3211 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
+    group: "sedan",
     actions: [
       {
         type: 1,
         title: "Car rent",
-        dates: ["2018-11-22T01:00:00", "2018-11-25T01:00:00"],
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
         cost: "124$"
       },
       {
         type: 2,
         title: "Car repair",
-        dates: ["2018-11-26T01:00:00", "2018-11-30T01:00:00"],
-        cost: "500$"
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
       },
       {
         type: 3,
         title: "Car check",
-        dates: ["2018-12-01T01:00:00", "2018-12-02T01:00:00"],
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
         cost: "500$"
       }
     ]
-  }
+  },
+  {
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },{
+    id: "3124",
+    title: "BMW M6",
+    group: "sedan",
+    actions: [
+      {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    ]
+  },
+
 ];
 $(document).ready(function() {
   "use strict";
   Timeline.init({
     source: carsArray,
     search: $("#search"),
-    cellWidth: 100,
+    cellWidth: 40,
     render: {
       rowHead: {
         template: function(row) {
-          return `${row.title}<br/>${row.id}`;
+          return `<div><b class="bold mb-5">${row.title}</b><br/>ID - ${
+            row.id
+          }</div>`;
         }
       },
       rowAction: {
@@ -63,14 +3275,17 @@ $(document).ready(function() {
         // $ - replace to row index
         attrsForType: {
           1: { class: "success" },
-          2: { class: "warning", id: "asd-$" },
-          3: { class: "brand" }
+          3: { class: "warning", id: "asd-$" },
+          2: { class: "brand" }
         },
         template: function(action) {
           const { title, dates, cost } = action;
-          const from = dates[0];
-          const to = dates[1];
-          return `<b>${title}</b><div>${from}${to}</div><br/>${cost}`;
+          const from = moment(dates[0]).format("DD.MM (HH:mm)");
+          const to = moment(dates[1]).format("DD.MM (HH:mm)");
+          const priceHTML = cost
+            ? `<span class="price">Total price - ${cost}</span>`
+            : "";
+          return `<b class="bold">${title}</b><div class="dates">From: ${from}<br/>To: ${to}</div>${priceHTML}`;
         }
       }
     }
