@@ -5,7 +5,6 @@ const Timeline = (function() {
   let setting = {
     source: "json",
     place: $("#timeline-wrap"),
-    search: false,
     cellWidth: 50,
     rows: [],
     daysBefore: 0,
@@ -45,22 +44,7 @@ const Timeline = (function() {
 
       return datesArray;
     },
-    /**
-     * Add zeros before number
-     * @param  {number} value for convert
-     * @param  {number} digits out string length (default 2)
-     * @return {string} numberStr
-     */
-    pad(value, digits = 2) {
-      let numberStr = String(value);
-      while (numberStr.length < digits) {
-        numberStr = "0" + numberStr;
-      }
-      return numberStr;
-    },
-    div: function(val, by) {
-      return (val - (val % by)) / by;
-    },
+
     getDatesRow: function(datesArray) {
       // create table row head
       let rowHead = '<div class="timeline__row-head">';
@@ -79,12 +63,9 @@ const Timeline = (function() {
       // create table row
       let row = `<div class="timeline__row"><div class="timeline__cell-wrap">`;
 
+      const width = setting.cellWidth * 2;
       for (let i = 0; i < datesArray.length; i++) {
-        const cellDay = `<div class="timeline__cell timeline__cell--half" style="width: ${
-          setting.cellWidth
-        }px"></div><div class="timeline__cell" style="width: ${
-          setting.cellWidth
-        }px"></div>`;
+        const cellDay = `<div class="timeline__cell" style="width: ${width}px"></div>`;
 
         row += cellDay;
       }

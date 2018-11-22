@@ -13,6 +13,7 @@ body
 $borderColor: #ececec
 $borderWeight: 2px
 $border: $borderWeight solid $borderColor
+$borderLight: 1px solid $borderColor
 
 $headRowHeight: 40px
 .timeline
@@ -45,6 +46,15 @@ $headRowHeight: 40px
 		display: flex
 		.timeline__cell
 			border-bottom: $border
+			position: relative
+			&::after
+				content: ''
+				position: absolute
+				left: 50%
+				top: 0
+				bottom: 0
+				border-right: $borderLight
+				transform: translateX(-50%)
 	&__row-head
 		height: $headRowHeight
 		display: flex
@@ -132,6 +142,9 @@ $headRowHeight: 40px
 	margin-bottom: 5px
 
 .left-vis
+	left: 0 !important
+
+.right-vis
 	left: 0 !important
 
 .dates
