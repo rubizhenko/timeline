@@ -61,7 +61,7 @@ const Timeline = (function() {
     },
     getRow: function(datesArray, actionsHTML) {
       // create table row
-      let row = `<div class="timeline__row"><div class="timeline__cell-wrap">`;
+      let row = `<div class="timeline__row">`;
 
       const width = setting.cellWidth * 2;
       for (let i = 0; i < datesArray.length; i++) {
@@ -69,7 +69,7 @@ const Timeline = (function() {
 
         row += cellDay;
       }
-      row += `</div>${actionsHTML}</div>`;
+      row += `${actionsHTML}</div>`;
 
       return row;
     },
@@ -208,6 +208,31 @@ const Timeline = (function() {
         }
       });
     },
+    setDatesRange: function(date) {
+      const { from, to } = date;
+
+      const mFrom = moment(from);
+      const mTo = moment(to);
+
+      const isValidDate = mFrom._isValid && mTo._isValid;
+      if (!isValidDate) {
+        return false;
+      }
+      if (from) {
+        const start = moment.duration(mFrom.diff(setting.now)).asDays();
+        if (start < 0) {
+          setting.daysBefore = -Math.ceil(start);
+        }
+        Timeline.reinit();
+      }
+      if (to) {
+        const end = moment.duration(mTo.diff(setting.now)).asDays();
+        if (end > 0) {
+          setting.viewDates = Math.ceil(end) + setting.daysBefore;
+        }
+        Timeline.reinit();
+      }
+    },
     reinit: function() {
       const dates = this.getDaysArray();
 
@@ -228,6 +253,8 @@ const Timeline = (function() {
       Timeline.renderTable(place, source, dates, rowHead, rowAction);
 
       Timeline.events();
+
+      return this;
     }
   };
 })();
