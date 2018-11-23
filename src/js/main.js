@@ -6,7 +6,7 @@ const carsArray = [
   {
     id: "123123131",
     title: "Honda Civic",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -37,7 +37,7 @@ const carsArray = [
   {
     id: "55123",
     title: "Toyota Camry",
-    group: "sedan",
+
     actions: [
       {
         type: 3,
@@ -56,7 +56,7 @@ const carsArray = [
   {
     id: "44125",
     title: "Bugatti Veyron",
-    group: "SportCar",
+
     actions: [
       {
         type: 2,
@@ -75,7 +75,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -100,7 +100,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -125,7 +125,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -150,7 +150,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -175,7 +175,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -200,7 +200,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -225,7 +225,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -250,7 +250,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -275,7 +275,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
@@ -300,7 +300,7 @@ const carsArray = [
   {
     id: "3124",
     title: "BMW M6",
-    group: "sedan",
+
     actions: [
       {
         type: 1,
