@@ -177,7 +177,9 @@ const Timeline = (function() {
     events: function() {
       $(document).on("click", ".js_timeline-action", function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
+
         const actions = $(".js_timeline-action");
         actions.removeClass("is-open");
         actions.removeClass("left-vis");

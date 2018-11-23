@@ -357,7 +357,7 @@ $(document).ready(function() {
         }
       },
       actionTemplate: function() {
-        return `<button class="add-action js_add-action">+</button>`;
+        return `<button class="add-action js_add-action"><span>+</span></button>`;
       }
     }
   });
