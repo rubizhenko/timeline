@@ -2,13 +2,18 @@
 {{#repeat 10}}
 {
 "id": {{@index}},
-"name": "{{firstName}} {{lastName}}",
-"work": "{{company}}",
-"email": "{{email}}",
-"dob": "{{date '1900' '2000' 'YYYY'}}",
-"address": "{{int 1 100}} {{street}}",
-"city": "{{city}}",
-"optedin": {{boolean}}
+"title": "lorem2",
+"actions": [
+{{#repeat 5}}
+{
+"type": {{int 1 3}},
+"title": "Car rent",
+"dates": ["{{date '2018-11-19T09:00' '2018-12-30T17:30'}}", "{{date '2018-11-19T09:00' '2018-12-30T17:30'}}"],
+"cost": "${{int 0 99999 '0,0'}}"
+},
+{{/repeat}}
+]
 }
+
 {{/repeat}}
 ]

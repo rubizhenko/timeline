@@ -25,10 +25,13 @@ $headRowHeight: 40px
 	display: flex
 	&__left
 		flex-shrink: 0
+		position: relative
+		z-index: 10
 		width: 200px
 		background: white
 		padding-top: $headRowHeight
 		border-right: $border
+		box-shadow: 1px 0 8px 0px rgba(0, 0, 0, 0.15)
 		.timeline__row
 			display: flex
 			align-items: center
@@ -43,10 +46,12 @@ $headRowHeight: 40px
 				border-top: $border
 	&__right
 		flex-shrink: 0
-		width: 100px
+		width: 50px
+		position: relative
 		background: white
 		padding-top: $headRowHeight
 		border-left: $border
+		box-shadow: -1px 0 8px 0px rgba(0, 0, 0, 0.15)
 		.timeline__row
 			display: flex
 			align-items: center
@@ -189,3 +194,39 @@ $headRowHeight: 40px
 
 .dates
 	padding: 0 10px
+.controls
+	padding: 20px
+	text-align: center
+.btn-control
+	padding: 10px 30px
+	background: none
+	color: #11b0d9
+	border: 2px solid currentColor
+	font-size: 18px
+	text-transform: uppercase
+	border-radius: 5px
+	cursor: pointer
+	&:hover
+		background: #11b0d9
+		color: white
+		border-color: #11b0d9
+
+.add-action
+	width: 40px
+	height: 40px
+	border-radius: 50%
+	border: 2px solid #11b0d9
+	background: none
+	font-size: 30px
+	display: flex
+	align-items: center
+	text-align: center
+	justify-content: center
+	font-weight: bold
+	color: #11b0d9
+	outline: none
+	cursor: pointer
+	+unselectable
+	&:hover
+		background: #11b0d9
+		color: white

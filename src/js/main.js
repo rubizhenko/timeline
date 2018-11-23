@@ -19,6 +19,18 @@ const carsArray = [
         title: "Car repair",
         dates: ["2018-11-24T15:40:00", "2018-11-25T15:40:00"],
         cost: "500$"
+      },
+      {
+        type: 3,
+        title: "Car repair",
+        dates: ["2018-11-29T15:40:00", "2018-12-04T15:40:00"],
+        cost: "500$"
+      },
+      {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-12-05T15:40:00", "2018-12-08T15:40:00"],
+        cost: "500$"
       }
     ]
   },
@@ -345,7 +357,7 @@ $(document).ready(function() {
         }
       },
       actionTemplate: function() {
-        return `<button class="js_add-action">Add action</button>`;
+        return `<button class="add-action js_add-action">+</button>`;
       }
     }
   });

@@ -50,9 +50,11 @@ const Timeline = (function() {
       let rowHead = '<div class="timeline__row-head">';
       const cellWidth = setting.cellWidth * 2 - 2;
       for (let i = 0; i < datesArray.length; i++) {
-        const cellDay = `<div class="timeline__cell" style="width:${cellWidth}px">${moment(
+        const cellDay = `<div class="timeline__cell" style="width:${cellWidth}px"><div class="timeline__cell-inner"><b>${moment(
           datesArray[i]
-        ).format("DD.MM")}<br>${moment(datesArray[i]).format("ddd")}</div>`;
+        ).format("DD.MM")}</b><br>${moment(datesArray[i]).format(
+          "ddd"
+        )}</div></div>`;
 
         rowHead += cellDay;
       }
@@ -167,7 +169,7 @@ const Timeline = (function() {
 
       tableHTML =
         `<div class="timeline__left">${tableLeftHTML}</div>` +
-        `<div class="timeline__body"><div class="timeline__body-wrap" style="min-width:${rowWidth}px">${tableBodyHTML}</div></div><div class="timeline__right">${itemNewActions}</div>`;
+        `<div class="timeline__body"><div class="timeline__body-wrap" style="width:${rowWidth}px">${tableBodyHTML}</div></div><div class="timeline__right">${itemNewActions}</div>`;
 
       place.html(tableHTML);
     },
