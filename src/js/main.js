@@ -346,12 +346,4 @@ $(document).ready(function() {
       }
     }
   });
-  $("#datepicker").change(function(e) {
-    const val = $(this).val();
-    timeline.setDatesRange({ from: val });
-  });
-  $("#datepickerTo").change(function(e) {
-    const val = $(this).val();
-    timeline.setDatesRange({ to: val });
-  });
 });
