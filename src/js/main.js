@@ -314,7 +314,7 @@ const carsArray = [
 $(document).ready(function() {
   "use strict";
 
-  const timeline = Timeline.init({
+  Timeline.init({
     source: carsArray,
     place: $("#timeline-wrap"),
     cellWidth: 50,
@@ -343,6 +343,9 @@ $(document).ready(function() {
             : "";
           return `<b class="bold">${title}</b><div class="dates">From: ${from}<br/>To: ${to}</div>${priceHTML}`;
         }
+      },
+      actionTemplate: function() {
+        return `<button class="js_add-action">Add action</button>`;
       }
     }
   });

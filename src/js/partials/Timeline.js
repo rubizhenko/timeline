@@ -62,7 +62,6 @@ const Timeline = (function() {
     getRow: function(datesArray, actionsHTML) {
       // create table row
       let row = `<div class="timeline__row">`;
-
       const width = setting.cellWidth * 2;
       for (let i = 0; i < datesArray.length; i++) {
         const cellDay = `<div class="timeline__cell" style="width: ${width}px"></div>`;
@@ -127,20 +126,28 @@ const Timeline = (function() {
         .join("");
       return actionsHTML;
     },
-    renderTable: function(place, data, datesArray, rowHead, rowAction) {
+    renderTable: function(
+      place,
+      data,
+      datesArray,
+      rowHead,
+      rowAction,
+      actionTemplate
+    ) {
       const titlesTemplate = rowHead.template;
       const actionsTemplate = rowAction.template;
       const actionsAttrs = rowAction.attrsForType;
       const rowWidth = datesArray.length * setting.cellWidth * 2;
-      let tableHeadHTML = "";
+      let tableLeftHTML = "";
       let tableBodyHTML = "";
       let tableHTML = "";
+      let itemNewActions = "";
 
       const datesRow = Timeline.getDatesRow(datesArray);
       tableBodyHTML += datesRow;
 
       data.map((item, id) => {
-        tableHeadHTML += `<div class="timeline__row">${titlesTemplate(
+        tableLeftHTML += `<div class="timeline__row">${titlesTemplate(
           item
         )}</div>`;
 
@@ -151,13 +158,16 @@ const Timeline = (function() {
           actionsAttrs
         );
         tableBodyHTML += Timeline.getRow(datesArray, actionsHTML);
+        itemNewActions += `<div class="timeline__row"><div class="timeline__new-action"  data-id="${
+          item.id
+        }">${actionTemplate()}</div></div>`;
       });
 
       tableBodyHTML += datesRow;
 
       tableHTML =
-        `<div class="timeline__head">${tableHeadHTML}</div>` +
-        `<div class="timeline__body"><div class="timeline__body-wrap" style="width:${rowWidth}px">${tableBodyHTML}</div></div>`;
+        `<div class="timeline__left">${tableLeftHTML}</div>` +
+        `<div class="timeline__body"><div class="timeline__body-wrap" style="min-width:${rowWidth}px">${tableBodyHTML}</div></div><div class="timeline__right">${itemNewActions}</div>`;
 
       place.html(tableHTML);
     },
@@ -214,8 +224,16 @@ const Timeline = (function() {
 
       const { source, render, place } = setting;
 
-      const { rowHead, rowAction } = render;
-      Timeline.renderTable(place, source, dates, rowHead, rowAction);
+      const { rowHead, rowAction, actionTemplate } = render;
+
+      Timeline.renderTable(
+        place,
+        source,
+        dates,
+        rowHead,
+        rowAction,
+        actionTemplate
+      );
     },
     init: function(props) {
       if (props) {
@@ -225,8 +243,15 @@ const Timeline = (function() {
 
       const { source, render, place } = setting;
 
-      const { rowHead, rowAction } = render;
-      Timeline.renderTable(place, source, dates, rowHead, rowAction);
+      const { rowHead, rowAction, actionTemplate } = render;
+      Timeline.renderTable(
+        place,
+        source,
+        dates,
+        rowHead,
+        rowAction,
+        actionTemplate
+      );
 
       Timeline.events();
 

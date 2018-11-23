@@ -15,12 +15,15 @@ $borderWeight: 2px
 $border: $borderWeight solid $borderColor
 $borderLight: 1px solid $borderColor
 
+$f-line-back: white
+$s-line-back: #fbfbfb
+
 $headRowHeight: 40px
 .timeline
 	border: $border
 	overflow: hidden
 	display: flex
-	&__head
+	&__left
 		flex-shrink: 0
 		width: 200px
 		background: white
@@ -32,18 +35,42 @@ $headRowHeight: 40px
 			justify-content: center
 			text-align: center
 			border-bottom: $border
+			&:nth-of-type(odd)
+				background: $f-line-back
+			&:nth-of-type(even)
+				background: $s-line-back
+			&:first-of-type
+				border-top: $border
+	&__right
+		flex-shrink: 0
+		width: 100px
+		background: white
+		padding-top: $headRowHeight
+		border-left: $border
+		.timeline__row
+			display: flex
+			align-items: center
+			justify-content: center
+			text-align: center
+			border-bottom: $border
+			&:nth-of-type(odd)
+				background: $f-line-back
+			&:nth-of-type(even)
+				background: $s-line-back
 			&:first-of-type
 				border-top: $border
 
 	&__body
 		overflow-x: auto
+		flex-grow: 1
 	&__body-wrap
 		overflow: hidden
-		border-right: $border
 	&__row
 		position: relative
 		height: 50px
 		display: flex
+		&:nth-of-type(odd)
+			background: $s-line-back
 		.timeline__cell
 			border-bottom: $border
 			position: relative
@@ -80,6 +107,18 @@ $headRowHeight: 40px
 			border-right: $border
 		&.timeline__cell--half
 				border-right: 1px solid lighten($borderColor, 2%)
+	&__new-action
+		position: absolute
+		z-index: 10
+		right: 0
+		left: 0
+		top: 0
+		bottom: 0
+		margin: auto
+		display: flex
+		align-items: center
+		justify-content: center
+
 	&__action
 		background: #cccccc
 		position: absolute
