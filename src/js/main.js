@@ -342,8 +342,8 @@ $(document).ready(function() {
         },
         template: function(action) {
           const { title, dates, cost } = action;
-          const from = moment(dates[0]).format("DD.MM (HH:mm)");
-          const to = moment(dates[1]).format("DD.MM (HH:mm)");
+          const from = moment(dates[0]).format("DD.MM (A)");
+          const to = moment(dates[1]).format("DD.MM (A)");
           const priceHTML = cost
             ? `<span class="price"><b class="bold">Total price</b> - ${cost}</span>`
             : "";

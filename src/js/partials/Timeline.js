@@ -119,7 +119,9 @@ const Timeline = (function() {
           const maxWidth = duration * setting.cellWidth;
 
           let style = `style="left: ${left}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
-          let data = `data-duration="${duration}"`;
+          let data = `data-duration="${duration}" data-from="${from.format(
+            "YYYY-MM-DDTHH:mm:ss"
+          )}"`;
 
           let attrs = style + " " + data;
           if (type) {
@@ -201,14 +203,7 @@ const Timeline = (function() {
 
         const actions = $(".js_timeline-action");
         actions.removeClass("is-open");
-        // actions.removeClass("left-vis");
         _this.addClass("is-open");
-
-        // const left = _this.css("left");
-        // const leftVal = parseInt(left);
-        // if (leftVal < 0) {
-        //   _this.addClass("left-vis");
-        // }
       });
       $(document).on("mouseup", ".js_timeline-action", function(e) {
         const _this = $(this);
@@ -256,11 +251,24 @@ const Timeline = (function() {
           toDateNode = $(event.target).find(".js_to-date");
         },
         drag: function(event, ui) {
-          fromDateNode.html(ui.position.left);
-          const left = ui.position.left;
+          // fromDateNode.html(ui.position.left);
         },
         stop: function(event, ui) {
-          console.log(ui.position.left);
+          // console.log(ui.position.left);
+          const target = $(event.target);
+          const left = ui.position.left - startLeft;
+          const hours = (left / setting.cellWidth) * 24;
+
+          const fromDate = new Date(target.data("from"));
+          const duration = target.data("duration");
+
+          const newDate = moment(fromDate).add(hours, "hours");
+
+          const endDate = newDate.add(duration, "days");
+          console.log(endDate.format("YYYY-MM-DDTHH:mm:ss"));
+
+          target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
+          fromDateNode.html(newDate.format("DD.MM (A)"));
         }
       });
     },
