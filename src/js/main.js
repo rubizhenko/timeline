@@ -11,7 +11,7 @@ const carsArray = [
       {
         type: 2,
         title: "Car repair Violet",
-        dates: ["2018-11-28T00:00:00", "2018-11-28T11:59:59"],
+        dates: ["2018-11-28T11:59:59", "2018-11-28T12:00:00"],
         cost: "500$"
       },
       {

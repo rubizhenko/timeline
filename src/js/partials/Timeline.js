@@ -6,7 +6,7 @@ const Timeline = (function() {
     place: $("#timeline-wrap"),
     cellWidth: 100,
     rows: [],
-    daysBefore: 0,
+    daysBefore: 5,
     viewDates: 15,
     now: moment(new Date().setHours(0, 0, 0, 0))._d
   };
@@ -85,33 +85,16 @@ const Timeline = (function() {
       return days;
     },
     getEndTimeCellNumber: function(from, to) {
-      // const isFromAm = from.format("hA").indexOf("AM") !== -1;
-      // const isToAm = to.format("hA").indexOf("AM") !== -1;
+      const isFromAm = from.format("hA").indexOf("AM") !== -1;
+      const isToAm = to.format("hA").indexOf("AM") !== -1;
 
-      // const formatFrom = moment(from._d.setHours(!isFromAm ? 12 : 0, 0, 0, 0));
-      // const formatTo = moment(to._d.setHours(!isToAm ? 12 : 0, 0, 0, 0));
+      const formatFrom = moment(from._d.setHours(!isFromAm ? 12 : 0, 0, 0, 0));
+      const formatTo = moment(to._d.setHours(!isToAm ? 12 : 0, 0, 0, 0));
 
-      let cells = moment.duration(from.diff(to)).asDays();
+      let cells = moment.duration(formatTo.diff(formatFrom)).asDays();
 
-      // cells += 0.5;
+      cells += 0.5;
 
-      console.log(cells);
-
-      // console.log(days % 0.5);
-
-      // if (days % 0.5) {
-      //   days = 0.5;
-      // } else {
-      //   days += 0.5;
-      // }
-      // days += isAm ? 0 : 0.5;
-
-      // if (days % 0.5) {
-      //   days = 0.5;
-      // } else if (days > 0.5 && isAm) {
-      //   days += 0.5;
-      // }
-      // days += isAm ? 0 : 0.5;
       return cells;
     },
 
