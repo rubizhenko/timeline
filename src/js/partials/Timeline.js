@@ -6,7 +6,7 @@ const Timeline = (function() {
     place: $("#timeline-wrap"),
     cellWidth: 100,
     rows: [],
-    daysBefore: 5,
+    daysBefore: 0,
     viewDates: 15,
     now: new Date()
   };
@@ -73,21 +73,41 @@ const Timeline = (function() {
 
       return row;
     },
-    formatTime: function(time) {
-      const part = time % 1;
-      const intPart = time - part;
-      if (time < 0) {
-        const format = intPart - (Math.abs(part) < 0.5 ? 0.5 : 1);
-        return format;
-      } else {
-        const format = intPart + (part < 0.5 ? 0.5 : 1);
-        return format;
+    getStartTimeCellNumber: function(now, startTime) {
+      let days = Math.floor(moment.duration(startTime.diff(now)).asDays());
+      console.log("Shift:" + moment.duration(startTime.diff(now)).asDays());
+
+      const isAm =
+        moment(startTime)
+          .format("hA")
+          .indexOf("AM") !== -1;
+
+      if (days < 0) {
+        days += isAm ? 0 : -0.5;
+      } else if (days > 0) {
+        days += isAm ? 0 : 0.5;
       }
+
+      return days;
+    },
+    getEndTimeCellNumber: function(from, to) {
+      const days = moment.duration(to.diff(from)).asDays();
+      let fullDays = parseInt(days);
+      console.log(fullDays, days);
+
+      const isAm =
+        moment(to)
+          .format("hA")
+          .indexOf("AM") !== -1;
+
+      if (fullDays < 1) {
+        fullDays += isAm ? 0 : 1;
+      }
+      // days += isAm ? 0 : 0.5;
+
+      return fullDays;
     },
 
-    offsetToDate: function(offset) {
-      const actionStart = moment.duration(from.diff(setting.now)).asDays();
-    },
     getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
       const actionsHTML = row.actions
         .map(action => {
@@ -96,25 +116,18 @@ const Timeline = (function() {
 
           const { type } = action;
 
-          const actionStart = Timeline.formatTime(
-            moment
-              .duration(from.diff(setting.now))
-              .asDays()
-              .toFixed(2)
+          // console.log(Timeline.getStartTimeCell(setting.now, from));
+
+          const actionStart = Timeline.getStartTimeCellNumber(
+            setting.now,
+            from
           );
 
-          const duration = Timeline.formatTime(
-            moment
-              .duration(to.diff(from))
-              .asDays()
-              .toFixed(2)
-          );
-          console.log(duration);
+          const duration = Timeline.getEndTimeCellNumber(from, to);
 
           const left =
             actionStart * setting.cellWidth +
-            setting.daysBefore * setting.cellWidth +
-            0.5 * setting.cellWidth;
+            setting.daysBefore * setting.cellWidth;
 
           const maxWidth = duration * setting.cellWidth;
 
@@ -286,6 +299,8 @@ const Timeline = (function() {
       if (props) {
         setting = Timeline.extendObject(setting, props);
       }
+      // setting.now.setHours(0);
+      // setting.now.setHours(0);
       const dates = this.getDaysArray();
 
       const { source, render, place } = setting;
