@@ -8,7 +8,7 @@ const Timeline = (function() {
     rows: [],
     daysBefore: 0,
     viewDates: 15,
-    now: new Date()
+    now: moment(new Date().setHours(0, 0, 0, 0))._d
   };
   return {
     extendObject: function(obj, src) {
@@ -73,39 +73,46 @@ const Timeline = (function() {
 
       return row;
     },
-    getStartTimeCellNumber: function(now, startTime) {
+    getStart: function(now, startTime) {
       let days = Math.floor(moment.duration(startTime.diff(now)).asDays());
-      console.log("Shift:" + moment.duration(startTime.diff(now)).asDays());
-
       const isAm =
         moment(startTime)
           .format("hA")
           .indexOf("AM") !== -1;
 
-      if (days < 0) {
-        days += isAm ? 0 : -0.5;
-      } else if (days > 0) {
-        days += isAm ? 0 : 0.5;
-      }
+      days += isAm ? 0 : 0.5;
 
       return days;
     },
     getEndTimeCellNumber: function(from, to) {
-      const days = moment.duration(to.diff(from)).asDays();
-      let fullDays = parseInt(days);
-      console.log(fullDays, days);
+      // const isFromAm = from.format("hA").indexOf("AM") !== -1;
+      // const isToAm = to.format("hA").indexOf("AM") !== -1;
 
-      const isAm =
-        moment(to)
-          .format("hA")
-          .indexOf("AM") !== -1;
+      // const formatFrom = moment(from._d.setHours(!isFromAm ? 12 : 0, 0, 0, 0));
+      // const formatTo = moment(to._d.setHours(!isToAm ? 12 : 0, 0, 0, 0));
 
-      if (fullDays < 1) {
-        fullDays += isAm ? 0 : 1;
-      }
+      let cells = moment.duration(from.diff(to)).asDays();
+
+      // cells += 0.5;
+
+      console.log(cells);
+
+      // console.log(days % 0.5);
+
+      // if (days % 0.5) {
+      //   days = 0.5;
+      // } else {
+      //   days += 0.5;
+      // }
       // days += isAm ? 0 : 0.5;
 
-      return fullDays;
+      // if (days % 0.5) {
+      //   days = 0.5;
+      // } else if (days > 0.5 && isAm) {
+      //   days += 0.5;
+      // }
+      // days += isAm ? 0 : 0.5;
+      return cells;
     },
 
     getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
@@ -118,10 +125,7 @@ const Timeline = (function() {
 
           // console.log(Timeline.getStartTimeCell(setting.now, from));
 
-          const actionStart = Timeline.getStartTimeCellNumber(
-            setting.now,
-            from
-          );
+          const actionStart = Timeline.getStart(setting.now, from);
 
           const duration = Timeline.getEndTimeCellNumber(from, to);
 
