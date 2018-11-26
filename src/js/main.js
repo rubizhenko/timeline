@@ -11,7 +11,7 @@ const carsArray = [
       {
         type: 1,
         title: "Car rent",
-        dates: ["2018-11-18T15:40:00", "2018-11-24T00:00:00"],
+        dates: ["2018-11-23T10:15:00", "2018-11-23T14:00:00"],
         cost: "124$"
       },
       {
@@ -329,7 +329,7 @@ $(document).ready(function() {
   Timeline.init({
     source: carsArray,
     place: $("#timeline-wrap"),
-    cellWidth: 50,
+    cellWidth: 100,
     render: {
       rowHead: {
         template: function(row) {
@@ -353,7 +353,7 @@ $(document).ready(function() {
           const priceHTML = cost
             ? `<span class="price"><b class="bold">Total price</b> - ${cost}</span>`
             : "";
-          return `<b class="bold">${title}</b><div class="dates">From: ${from}<br/>To: ${to}</div>${priceHTML}`;
+          return `<b class="bold">${title}</b><div class="dates">From: <span class="js_from-date">${from}</span><br/>To: <span class="js_to-date">${to}</span></div>${priceHTML}`;
         }
       },
       actionTemplate: function() {

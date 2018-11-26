@@ -1,13 +1,12 @@
 import $ from "jquery";
-
 const Timeline = (function() {
   "use strict";
   let setting = {
     source: "json",
     place: $("#timeline-wrap"),
-    cellWidth: 50,
+    cellWidth: 100,
     rows: [],
-    daysBefore: 0,
+    daysBefore: 5,
     viewDates: 15,
     now: new Date()
   };
@@ -48,7 +47,7 @@ const Timeline = (function() {
     getDatesRow: function(datesArray) {
       // create table row head
       let rowHead = '<div class="timeline__row-head">';
-      const cellWidth = setting.cellWidth * 2 - 2;
+      const cellWidth = setting.cellWidth - 2;
       for (let i = 0; i < datesArray.length; i++) {
         const cellDay = `<div class="timeline__cell" style="width:${cellWidth}px"><div class="timeline__cell-inner"><b>${moment(
           datesArray[i]
@@ -64,7 +63,7 @@ const Timeline = (function() {
     getRow: function(datesArray, actionsHTML) {
       // create table row
       let row = `<div class="timeline__row">`;
-      const width = setting.cellWidth * 2;
+      const width = setting.cellWidth;
       for (let i = 0; i < datesArray.length; i++) {
         const cellDay = `<div class="timeline__cell" style="width: ${width}px"></div>`;
 
@@ -74,35 +73,55 @@ const Timeline = (function() {
 
       return row;
     },
-    getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
-      const hourWidth = (setting.cellWidth / 12).toFixed(2);
+    formatTime: function(time) {
+      const part = time % 1;
+      const intPart = time - part;
+      if (time < 0) {
+        const format = intPart - (Math.abs(part) < 0.5 ? 0.5 : 1);
+        return format;
+      } else {
+        const format = intPart + (part < 0.5 ? 0.5 : 1);
+        return format;
+      }
+    },
 
+    offsetToDate: function(offset) {
+      const actionStart = moment.duration(from.diff(setting.now)).asDays();
+    },
+    getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
       const actionsHTML = row.actions
         .map(action => {
           const from = moment(action.dates[0]);
           const to = moment(action.dates[1]);
 
-          const duration = moment
-            .duration(to.diff(from))
-            .asHours()
-            .toFixed(2);
-          const actionStart =
-            moment
-              .duration(from.diff(setting.now))
-              .asHours()
-              .toFixed(2) + setting.now.getHours();
-
           const { type } = action;
 
-          const left =
-            (+actionStart + setting.now.getHours()) * hourWidth +
-            setting.daysBefore * setting.cellWidth * 2;
+          const actionStart = Timeline.formatTime(
+            moment
+              .duration(from.diff(setting.now))
+              .asDays()
+              .toFixed(2)
+          );
 
-          const maxWidth = duration * hourWidth;
+          const duration = Timeline.formatTime(
+            moment
+              .duration(to.diff(from))
+              .asDays()
+              .toFixed(2)
+          );
+          console.log(duration);
+
+          const left =
+            actionStart * setting.cellWidth +
+            setting.daysBefore * setting.cellWidth +
+            0.5 * setting.cellWidth;
+
+          const maxWidth = duration * setting.cellWidth;
 
           let style = `style="left: ${left}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
+          let data = `data-duration="${duration}"`;
 
-          let attrs = style;
+          let attrs = style + " " + data;
           if (type) {
             const attrsObj = actionsAttrs[type];
             attrs +=
@@ -139,7 +158,7 @@ const Timeline = (function() {
       const titlesTemplate = rowHead.template;
       const actionsTemplate = rowAction.template;
       const actionsAttrs = rowAction.attrsForType;
-      const rowWidth = datesArray.length * setting.cellWidth * 2;
+      const rowWidth = datesArray.length * setting.cellWidth;
       let tableLeftHTML = "";
       let tableBodyHTML = "";
       let tableHTML = "";
@@ -175,23 +194,26 @@ const Timeline = (function() {
     },
 
     events: function() {
-      $(document).on("click", ".js_timeline-action", function(e) {
+      $(document).on("mousedown", ".js_timeline-action", function(e) {
         e.preventDefault();
         e.stopPropagation();
         const _this = $(this);
 
         const actions = $(".js_timeline-action");
         actions.removeClass("is-open");
-        actions.removeClass("left-vis");
+        // actions.removeClass("left-vis");
         _this.addClass("is-open");
 
-        const left = _this.css("left");
-        const leftVal = parseInt(left);
-        if (leftVal < 0) {
-          _this.addClass("left-vis");
-        }
+        // const left = _this.css("left");
+        // const leftVal = parseInt(left);
+        // if (leftVal < 0) {
+        //   _this.addClass("left-vis");
+        // }
       });
-
+      $(document).on("mouseup", ".js_timeline-action", function(e) {
+        const _this = $(this);
+        _this.removeClass("is-open");
+      });
       $(".js_add-prev-day").click(function() {
         setting.daysBefore += 1;
         Timeline.reinit();
@@ -222,6 +244,26 @@ const Timeline = (function() {
         }
       });
     },
+    dragEvents: function(selector) {
+      let startLeft = 0;
+      let fromDateNode, toDateNode;
+      $(selector).draggable({
+        axis: "x",
+        grid: [setting.cellWidth / 2, 0],
+        start: function(event, ui) {
+          startLeft = ui.position.left;
+          fromDateNode = $(event.target).find(".js_from-date");
+          toDateNode = $(event.target).find(".js_to-date");
+        },
+        drag: function(event, ui) {
+          fromDateNode.html(ui.position.left);
+          const left = ui.position.left;
+        },
+        stop: function(event, ui) {
+          console.log(ui.position.left);
+        }
+      });
+    },
 
     reinit: function() {
       const dates = this.getDaysArray();
@@ -238,6 +280,7 @@ const Timeline = (function() {
         rowAction,
         actionTemplate
       );
+      Timeline.dragEvents(".js_timeline-action");
     },
     init: function(props) {
       if (props) {
@@ -248,6 +291,7 @@ const Timeline = (function() {
       const { source, render, place } = setting;
 
       const { rowHead, rowAction, actionTemplate } = render;
+
       Timeline.renderTable(
         place,
         source,
@@ -258,6 +302,8 @@ const Timeline = (function() {
       );
 
       Timeline.events();
+
+      Timeline.dragEvents(".js_timeline-action");
 
       return this;
     }

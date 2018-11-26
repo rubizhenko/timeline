@@ -32,7 +32,6 @@ $headRowHeight: 40px
 		width: 200px
 		background: white
 		padding-top: $headRowHeight
-		border-right: $border
 		box-shadow: 1px 0 8px 0px rgba(0, 0, 0, 0.15)
 		.timeline__row
 			display: flex
@@ -52,7 +51,6 @@ $headRowHeight: 40px
 		position: relative
 		background: white
 		padding-top: $headRowHeight
-		border-left: $border
 		box-shadow: -1px 0 8px 0px rgba(0, 0, 0, 0.15)
 		.timeline__row
 			display: flex
@@ -188,17 +186,18 @@ $headRowHeight: 40px
 	border-radius: 5px
 	cursor: pointer
 	border: none
+	transition: background .3s
 	&:hover
-		background: #00c5dc
-		color: white
-		background: darken(#00c5dc, 5%)
+		background: #3482fe
+		color: white 
 
 
 .add-action
 	width: 40px
 	height: 40px
+	line-height: 36px
 	border-radius: 50%
-	border: 2px solid #7427ca
+	border: 2px solid transparentize(#7427ca, .6)
 	background: none
 	font-size: 30px
 	display: flex
@@ -206,10 +205,11 @@ $headRowHeight: 40px
 	text-align: center
 	justify-content: center
 	font-weight: bold
-	color: #7427ca
+	color: transparentize(#7427ca, .6)
 	outline: none
 	cursor: pointer
 	+unselectable
+	transition: background .3s
 	&:hover
-		background: #7427ca
+		background: transparentize(#7427ca, .6)
 		color: white
