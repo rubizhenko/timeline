@@ -125,8 +125,10 @@ $(document).ready(function() {
           return `<b class="bold">${title}</b><div class="dates">From: <span class="js_from-date">${from}</span><br/>To: <span class="js_to-date">${to}</span></div>${priceHTML}`;
         }
       },
-      actionTemplate: function() {
-        return `<button class="add-action js_add-action"><span>+</span></button>`;
+      actionTemplate: function(row) {
+        const title = row.title;
+        const id = row.id;
+        return `<button class="add-action js_add-action" title="${title} - ${id}"><span>+</span></button>`;
       }
     }
   });

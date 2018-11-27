@@ -60,9 +60,9 @@ const Timeline = (function() {
       rowHead += "</div>";
       return rowHead;
     },
-    getRow: function(datesArray, actionsHTML) {
+    getRow: function(datesArray, actionsHTML, id) {
       // create table row
-      let row = `<div class="timeline__row">`;
+      let row = `<div class="timeline__row" data-row-id="${id}">`;
       const width = setting.cellWidth;
       for (let i = 0; i < datesArray.length; i++) {
         const cellDay = `<div class="timeline__cell" style="width: ${width}px"></div>`;
@@ -167,9 +167,10 @@ const Timeline = (function() {
       tableBodyHTML += datesRow;
 
       data.map((item, id) => {
-        tableLeftHTML += `<div class="timeline__row">${titlesTemplate(
-          item
-        )}</div>`;
+        const rowID = item.id;
+        tableLeftHTML += `<div class="timeline__row" data-row-id="${
+          item.id
+        }">${titlesTemplate(item)}</div>`;
 
         const actionsHTML = Timeline.getRowActions(
           item,
@@ -177,10 +178,10 @@ const Timeline = (function() {
           actionsTemplate,
           actionsAttrs
         );
-        tableBodyHTML += Timeline.getRow(datesArray, actionsHTML);
-        itemNewActions += `<div class="timeline__row"><div class="timeline__new-action"  data-id="${
-          item.id
-        }">${actionTemplate()}</div></div>`;
+        tableBodyHTML += Timeline.getRow(datesArray, actionsHTML, rowID);
+        itemNewActions += `<div class="timeline__row" data-row-id="${rowID}"><div class="timeline__new-action" data-id="${rowID}">
+        ${actionTemplate(item)}
+        </div></div>`;
       });
 
       tableBodyHTML += datesRow;
@@ -231,6 +232,18 @@ const Timeline = (function() {
           actions.removeClass("left-vis");
         }
       });
+    },
+    hoverRowEvent: function() {
+      $("[data-row-id]").hover(
+        function() {
+          const _this = $(this);
+          const id = _this.data("row-id");
+          $(`[data-row-id="${id}"]`).addClass("is-active");
+        },
+        () => {
+          $("[data-row-id]").removeClass("is-active");
+        }
+      );
     },
     testHit: function(row, newStart, newEnd, onSuccess, onError) {
       const actions = row.find(".js_timeline-action:not(.js_current-move)");
@@ -318,6 +331,7 @@ const Timeline = (function() {
         rowAction,
         actionTemplate
       );
+      Timeline.hoverRowEvent();
       Timeline.dragEvents(".js_timeline-action");
     },
     init: function(props) {
@@ -342,6 +356,8 @@ const Timeline = (function() {
       );
 
       Timeline.events();
+
+      Timeline.hoverRowEvent();
 
       Timeline.dragEvents(".js_timeline-action");
 
