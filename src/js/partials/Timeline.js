@@ -267,9 +267,6 @@ const Timeline = (function() {
           toDateNode = target.find(".js_to-date");
           target.addClass("js_current-move");
         },
-        drag: function(event, ui) {
-          // fromDateNode.html(ui.position.left);
-        },
         stop: function(event, ui) {
           // console.log(ui.position.left);
           const target = $(event.target);
