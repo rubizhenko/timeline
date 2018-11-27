@@ -244,8 +244,28 @@ const Timeline = (function() {
         }
       );
     },
+    testHitResize: function(row, newEnd, newDuration, onSuccess, onError) {
+      const actions = row.find(".js_timeline-action:not(.js_current-interact)");
+      let errorsCount = 0;
+      $.each(actions, function(i, el) {
+        const _el = $(el);
+        const start = _el.data("start");
+        if (newEnd > start) {
+          errorsCount += 1;
+        }
+      });
+      if (errorsCount > 0) {
+        onError();
+      } else {
+        if (confirm("Are you sure?")) {
+          onSuccess(newDuration);
+        } else {
+          onError();
+        }
+      }
+    },
     testHit: function(row, newStart, newEnd, onSuccess, onError) {
-      const actions = row.find(".js_timeline-action:not(.js_current-move)");
+      const actions = row.find(".js_timeline-action:not(.js_current-interact)");
       // console.log(actions);
       let errorsCount = 0;
       $.each(actions, function(i, el) {
@@ -274,28 +294,26 @@ const Timeline = (function() {
       let startLeft = 0;
       let fromDateNode, toDateNode;
       let parentRow = "";
+      let target = "";
 
       $(selector).draggable({
         axis: "x",
         grid: [setting.cellWidth / 2, 0],
         start: function(event, ui) {
           startLeft = ui.position.left;
-          const target = $(event.target);
+          target = $(event.target);
           parentRow = target.closest("[data-row-id]");
           fromDateNode = target.find(".js_from-date");
           toDateNode = target.find(".js_to-date");
-          parentRow.addClass("row-draggable");
-          target.addClass("js_current-move");
+          parentRow.addClass("row-interact");
+          target.addClass("js_current-interact");
         },
         stop: function(event, ui) {
-          // console.log(ui.position.left);
-          const target = $(event.target);
-          const row = target.parents(".timeline__row");
           const dataDuration = target.data("duration");
           const newStart = ui.position.left / setting.cellWidth;
           const newEnd = +newStart + dataDuration;
           Timeline.testHit(
-            row,
+            parentRow,
             newStart,
             newEnd,
             newStart => {
@@ -321,28 +339,65 @@ const Timeline = (function() {
               target.css("left", startLeft);
             }
           );
-          parentRow.removeClass("row-draggable");
-          target.removeClass("js_current-move");
+          parentRow.removeClass("row-interact");
+          target.removeClass("is-open");
+          target.removeClass("js_current-interact");
         }
       });
     },
 
     resizeEvents: function(selector) {
       let target = "";
-
+      let toDateNode;
+      let parentRow = "";
+      let startSize = 0;
       $(selector).resizable({
         handles: "e",
         grid: setting.cellWidth / 2,
         start: function(event, ui) {
           target = $(event.target);
+          toDateNode = target.find(".js_to-date");
+          parentRow = target.closest("[data-row-id]");
+          parentRow.addClass("row-interact");
           target.addClass("is-resized");
-          console.log(ui.size.width);
-        },
-        resize: function(event, ui) {
-          console.log(ui.size.width);
+          target.addClass("js_current-interact");
+          startSize = ui.size.width;
         },
         stop: function(event, ui) {
+          const dataDuration = +target.data("duration");
+          const start = +target.data("start");
+          const newEnd =
+            start +
+            dataDuration +
+            (ui.size.width - startSize) / setting.cellWidth;
+          const newDuration = newEnd - start;
+
+          Timeline.testHitResize(
+            parentRow,
+            newEnd,
+            newDuration,
+            newDuration => {
+              const fromDate = new Date(target.data("from"));
+              // TODO: TEST on MACOS
+              let time = newDuration * 24 - 12;
+
+              const endDate = moment(fromDate).add(time, "hours");
+              console.log(endDate);
+
+              // target.data("duration", newStart);
+
+              // toDateNode.html(endDate.format("DD.MM (A)"));
+            },
+            () => {
+              // target.css("left", startLeft);
+            }
+          );
           target.removeClass("is-resized");
+          parentRow.removeClass("row-interact");
+          target.removeClass("js_current-interact");
+          target.removeClass("is-open");
+
+          // const newEnd = +newStart + dataDuration;
         }
       });
     },
@@ -364,13 +419,12 @@ const Timeline = (function() {
       );
       Timeline.hoverRowEvent();
       Timeline.dragEvents(".js_timeline-action");
+      Timeline.resizeEvents(".js_timeline-action");
     },
     init: function(props) {
       if (props) {
         setting = Timeline.extendObject(setting, props);
       }
-      // setting.now.setHours(0);
-      // setting.now.setHours(0);
       const dates = this.getDaysArray();
 
       const { source, render, place } = setting;

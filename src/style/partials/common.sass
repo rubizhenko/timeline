@@ -23,9 +23,26 @@ $on-drag-color: rgba(0, 231, 255, 0.3)
 $on-drag-border-color: darken($on-drag-color, 10%)
 
 $headRowHeight: 40px
-
-.ui-resizable-e
-	width: 20px
+.timeline
+	.ui-resizable-e
+		width: 25px
+		right: 0
+		transition: background .3s
+		&:hover
+			background: rgba(255,255,255,.2)
+		&::after, &::before
+			content: ''
+			position: absolute
+			background: rgba(255,255,255,.4)
+			top: 50%
+			width: 1px
+			transform: translateY(-50%)
+		&::before
+			left: 25%
+			height: 17px
+		&::after
+			left: 50%
+			height: 20px
 .timeline
 	border: $border
 	overflow: hidden
@@ -86,7 +103,7 @@ $headRowHeight: 40px
 			background: $s-line-back
 		&.is-active
 			background: darken($s-line-back, 2%) !important
-		&.row-draggable
+		&.row-interact
 			background: $on-drag-color !important
 			.timeline__cell
 				border-right-color: $on-drag-border-color
@@ -146,6 +163,8 @@ $headRowHeight: 40px
 		z-index: 9
 		&.is-open:not(.is-resized)
 			z-index: 10
+			.ui-resizable-e
+				display: none
 			.timeline__action
 				max-width: 500px !important
 				max-height: 500px !important
@@ -156,14 +175,14 @@ $headRowHeight: 40px
 			transition: none
 			.timeline__action
 				max-width: 100% !important
-				min-width: 0 !important
 
-		&.js_current-move
+		&.js_current-interact
 			z-index: 10
 
 	&__action
 		background: #cccccc
 		max-height: 100%
+		min-width: 100%
 		max-width: 100%
 		width: 100%
 		transition: all .3s
@@ -174,7 +193,7 @@ $headRowHeight: 40px
 		left: 0
 		top: 0
 		bottom: 0
-		padding: 5px 15px
+		padding: 5px 30px 5px 15px
 		+unselectable
 		&-content
 			+text-overflow
@@ -228,14 +247,14 @@ $headRowHeight: 40px
 
 
 .add-action
-	width: 40px
-	height: 40px
+	width: 30px
+	height: 30px
 	line-height: 36px
 	border-radius: 50%
 	background: none
 	font-weight: bold
 	color: #7427ca
-	border: 2px solid currentColor
+	border: 1px solid currentColor
 	outline: none
 	cursor: pointer
 	+unselectable
@@ -250,11 +269,11 @@ $headRowHeight: 40px
 		transform: translate(-50%, -50%)
 		background: currentColor
 	&::before
-		width: 15px
-		height: 3px
+		width: 10px
+		height: 2px
 	&::after
-		width: 3px
-		height: 15px
+		width: 2px
+		height: 10px
 	&:hover
 		background: transparentize(#7427ca, .6)
 		&::before, &::after
