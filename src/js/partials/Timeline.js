@@ -115,7 +115,7 @@ const Timeline = (function() {
 
           const maxWidth = duration * setting.cellWidth;
 
-          let style = `style="left: ${left}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
+          let style = `style="left: ${left}px; width: ${maxWidth}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
           let data = `data-start="${start}" data-duration="${duration}" data-from="${from.format(
             "YYYY-MM-DDTHH:mm:ss"
           )}"`;
@@ -275,6 +275,7 @@ const Timeline = (function() {
       let startLeft = 0;
       let fromDateNode, toDateNode;
       let parentRow = "";
+
       $(selector).draggable({
         axis: "x",
         grid: [setting.cellWidth / 2, 0],
@@ -327,6 +328,27 @@ const Timeline = (function() {
       });
     },
 
+    resizeEvents: function(selector) {
+      let target = "";
+      console.log(setting.cellWidth / 2);
+
+      $(selector).resizable({
+        handles: "e",
+        grid: setting.cellWidth / 2,
+        start: function(event, ui) {
+          target = $(event.target);
+          target.addClass("is-resized");
+          console.log(ui.size.width);
+        },
+        resize: function(event, ui) {
+          console.log(ui.size.width);
+        },
+        stop: function(event, ui) {
+          target.removeClass("is-resized");
+        }
+      });
+    },
+
     reinit: function() {
       const dates = this.getDaysArray();
 
@@ -371,6 +393,8 @@ const Timeline = (function() {
       Timeline.hoverRowEvent();
 
       Timeline.dragEvents(".js_timeline-action");
+
+      Timeline.resizeEvents(".js_timeline-action");
 
       return this;
     }

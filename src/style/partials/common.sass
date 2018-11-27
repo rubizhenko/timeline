@@ -24,7 +24,8 @@ $on-drag-border-color: darken($on-drag-color, 10%)
 
 $headRowHeight: 40px
 
-
+.ui-resizable-e
+	width: 20px
 .timeline
 	border: $border
 	overflow: hidden
@@ -151,11 +152,17 @@ $headRowHeight: 40px
 		z-index: 9
 		padding: 5px 15px
 		+unselectable
-		&.is-open
+		&.is-open:not(.is-resized)
 			z-index: 10
 			max-width: 500px !important
 			max-height: 500px !important
+			width: auto !important
 			opacity: 1
+		&.is-resized
+			max-width: 100% !important
+			min-width: 0 !important
+			transition: none
+
 		&.js_current-move
 			z-index: 10
 		&-content
