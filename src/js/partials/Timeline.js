@@ -106,8 +106,6 @@ const Timeline = (function() {
 
           const { type } = action;
 
-          // console.log(Timeline.getStartTimeCell(setting.now, from));
-
           const actionStart = Timeline.getStart(setting.now, from);
 
           const duration = Timeline.getEndTimeCellNumber(from, to);
@@ -196,18 +194,14 @@ const Timeline = (function() {
     },
 
     events: function() {
-      $(document).on("mousedown", ".js_timeline-action", function(e) {
+      $(document).on("click", ".js_timeline-action", function(e) {
         e.preventDefault();
         e.stopPropagation();
         const _this = $(this);
 
         const actions = $(".js_timeline-action");
         actions.removeClass("is-open");
-        _this.addClass("is-open");
-      });
-      $(document).on("mouseup", ".js_timeline-action", function(e) {
-        const _this = $(this);
-        _this.removeClass("is-open");
+        _this.toggleClass("is-open");
       });
       $(".js_add-prev-day").click(function() {
         setting.daysBefore += 1;
@@ -260,15 +254,16 @@ const Timeline = (function() {
           const hours = (left / setting.cellWidth) * 24;
 
           const fromDate = new Date(target.data("from"));
-          const duration = target.data("duration");
+          let duration = target.data("duration") * 24;
 
           const newDate = moment(fromDate).add(hours, "hours");
 
-          const endDate = newDate.add(duration, "days");
-          console.log(endDate.format("YYYY-MM-DDTHH:mm:ss"));
+          const endDate = moment(newDate).add(duration - 1, "hours");
 
           target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
+
           fromDateNode.html(newDate.format("DD.MM (A)"));
+          toDateNode.html(endDate.format("DD.MM (A)"));
         }
       });
     },
