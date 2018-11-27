@@ -115,33 +115,32 @@ const Timeline = (function() {
 
           const maxWidth = duration * setting.cellWidth;
 
-          let style = `style="left: ${left}px; width: ${maxWidth}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
           let data = `data-start="${start}" data-duration="${duration}" data-from="${from.format(
             "YYYY-MM-DDTHH:mm:ss"
           )}"`;
 
-          let attrs = style + " " + data;
+          let attrsAction = "";
           if (type) {
             const attrsObj = actionsAttrs[type];
-            attrs +=
+            attrsAction +=
               " " +
               Object.keys(attrsObj)
                 .map(attr => {
                   const attrVal = attrsObj[attr];
                   const attribute =
                     attr === "class"
-                      ? `${attr}="timeline__action ${attrVal} js_timeline-action"`
+                      ? `${attr}="timeline__action ${attrVal}"`
                       : `${attr}="${attrVal.replace("$", rowId)}"`;
                   return attribute;
                 })
                 .join(" ");
           }
 
-          return `<div ${attrs}>
+          return `<div class="timeline__action-wrap js_timeline-action" style="left: ${left}px; width: ${maxWidth}px;" ${data}><div ${attrsAction}>
         <div class="timeline__action-content">
           ${actionsTemplate(action)}
         </div>
-        </div>`;
+        </div></div>`;
         })
         .join("");
       return actionsHTML;
@@ -330,7 +329,6 @@ const Timeline = (function() {
 
     resizeEvents: function(selector) {
       let target = "";
-      console.log(setting.cellWidth / 2);
 
       $(selector).resizable({
         handles: "e",
