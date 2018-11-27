@@ -110,14 +110,13 @@ const Timeline = (function() {
 
           const duration = Timeline.getEndTimeCellNumber(from, to);
 
-          const left =
-            actionStart * setting.cellWidth +
-            setting.daysBefore * setting.cellWidth;
+          const start = actionStart + setting.daysBefore;
+          const left = start * setting.cellWidth;
 
           const maxWidth = duration * setting.cellWidth;
 
           let style = `style="left: ${left}px; max-width: ${maxWidth}px; min-width: ${maxWidth}px"`;
-          let data = `data-duration="${duration}" data-from="${from.format(
+          let data = `data-start="${start}" data-duration="${duration}" data-from="${from.format(
             "YYYY-MM-DDTHH:mm:ss"
           )}"`;
 
@@ -233,6 +232,28 @@ const Timeline = (function() {
         }
       });
     },
+    testHit: function(row, newStart, newEnd, onSuccess, onError) {
+      const actions = row.find(".js_timeline-action:not(.js_current-move)");
+      // console.log(actions);
+      let errorsCount = 0;
+      $.each(actions, function(i, el) {
+        const _el = $(el);
+        const start = _el.data("start");
+        const end = +start + _el.data("duration");
+        if (
+          (newStart >= start && newEnd < end) ||
+          (newEnd > start && newStart < start) ||
+          (newStart < end && newStart >= start)
+        ) {
+          errorsCount += 1;
+        }
+      });
+      if (errorsCount > 0) {
+        onError();
+      } else {
+        onSuccess(newStart);
+      }
+    },
     dragEvents: function(selector) {
       let startLeft = 0;
       let fromDateNode, toDateNode;
@@ -241,8 +262,10 @@ const Timeline = (function() {
         grid: [setting.cellWidth / 2, 0],
         start: function(event, ui) {
           startLeft = ui.position.left;
-          fromDateNode = $(event.target).find(".js_from-date");
-          toDateNode = $(event.target).find(".js_to-date");
+          const target = $(event.target);
+          fromDateNode = target.find(".js_from-date");
+          toDateNode = target.find(".js_to-date");
+          target.addClass("js_current-move");
         },
         drag: function(event, ui) {
           // fromDateNode.html(ui.position.left);
@@ -250,20 +273,35 @@ const Timeline = (function() {
         stop: function(event, ui) {
           // console.log(ui.position.left);
           const target = $(event.target);
-          const left = ui.position.left - startLeft;
-          const hours = (left / setting.cellWidth) * 24;
+          const row = target.parents(".timeline__row");
+          const dataDuration = target.data("duration");
+          const newStart = ui.position.left / setting.cellWidth;
+          const newEnd = +newStart + dataDuration;
+          Timeline.testHit(
+            row,
+            newStart,
+            newEnd,
+            newStart => {
+              const left = ui.position.left - startLeft;
+              const hours = (left / setting.cellWidth) * 24;
+              const fromDate = new Date(target.data("from"));
+              let time = dataDuration * 24;
 
-          const fromDate = new Date(target.data("from"));
-          let duration = target.data("duration") * 24;
+              const newDate = moment(fromDate).add(hours, "hours");
 
-          const newDate = moment(fromDate).add(hours, "hours");
+              const endDate = moment(newDate).add(time - 1, "hours");
 
-          const endDate = moment(newDate).add(duration - 1, "hours");
+              target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
+              target.data("start", newStart);
 
-          target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
-
-          fromDateNode.html(newDate.format("DD.MM (A)"));
-          toDateNode.html(endDate.format("DD.MM (A)"));
+              fromDateNode.html(newDate.format("DD.MM (A)"));
+              toDateNode.html(endDate.format("DD.MM (A)"));
+            },
+            () => {
+              target.css("left", startLeft);
+            }
+          );
+          target.removeClass("js_current-move");
         }
       });
     },
