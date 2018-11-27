@@ -264,20 +264,27 @@ const Timeline = (function() {
       if (errorsCount > 0) {
         onError();
       } else {
-        onSuccess(newStart);
+        if (confirm("Are you sure?")) {
+          onSuccess(newStart);
+        } else {
+          onError();
+        }
       }
     },
     dragEvents: function(selector) {
       let startLeft = 0;
       let fromDateNode, toDateNode;
+      let parentRow = "";
       $(selector).draggable({
         axis: "x",
         grid: [setting.cellWidth / 2, 0],
         start: function(event, ui) {
           startLeft = ui.position.left;
           const target = $(event.target);
+          parentRow = target.closest("[data-row-id]");
           fromDateNode = target.find(".js_from-date");
           toDateNode = target.find(".js_to-date");
+          parentRow.addClass("row-draggable");
           target.addClass("js_current-move");
         },
         stop: function(event, ui) {
@@ -295,11 +302,14 @@ const Timeline = (function() {
               const left = ui.position.left - startLeft;
               const hours = (left / setting.cellWidth) * 24;
               const fromDate = new Date(target.data("from"));
-              let time = dataDuration * 24;
+
+              // TODO: TEST on MACOS
+
+              let time = dataDuration * 24 - 12;
 
               const newDate = moment(fromDate).add(hours, "hours");
 
-              const endDate = moment(newDate).add(time - 1, "hours");
+              const endDate = moment(newDate).add(time, "hours");
 
               target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
               target.data("start", newStart);
@@ -311,6 +321,7 @@ const Timeline = (function() {
               target.css("left", startLeft);
             }
           );
+          parentRow.removeClass("row-draggable");
           target.removeClass("js_current-move");
         }
       });

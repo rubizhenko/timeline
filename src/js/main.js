@@ -128,7 +128,7 @@ $(document).ready(function() {
       actionTemplate: function(row) {
         const title = row.title;
         const id = row.id;
-        return `<button class="add-action js_add-action" title="${title} - ${id}"><span>+</span></button>`;
+        return `<button class="add-action js_add-action" title="${title} - ${id}"></button>`;
       }
     }
   });
