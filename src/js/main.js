@@ -33,12 +33,12 @@ const carsArray = [
     title: "Toyota Camry",
 
     actions: [
-      {
-        type: 3,
-        title: "Car repair",
-        dates: ["2018-11-20T15:40:00", "2018-11-22T15:40:00"],
-        cost: "124$"
-      },
+      // {
+      //   type: 3,
+      //   title: "Car repair",
+      //   dates: ["2018-11-20T15:40:00", "2018-11-22T15:40:00"],
+      //   cost: "124$"
+      // },
       {
         type: 1,
         title: "Car rent",

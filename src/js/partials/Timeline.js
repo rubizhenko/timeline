@@ -244,13 +244,13 @@ const Timeline = (function() {
         }
       );
     },
-    testHitResize: function(row, newEnd, newDuration, onSuccess, onError) {
+    testHitResize: function(row, newStart, newEnd, onSuccess, onError) {
       const actions = row.find(".js_timeline-action:not(.js_current-interact)");
       let errorsCount = 0;
       $.each(actions, function(i, el) {
         const _el = $(el);
         const start = _el.data("start");
-        if (newEnd > start) {
+        if (start && newEnd > start && newStart < start) {
           errorsCount += 1;
         }
       });
@@ -258,7 +258,7 @@ const Timeline = (function() {
         onError();
       } else {
         if (confirm("Are you sure?")) {
-          onSuccess(newDuration);
+          onSuccess(newEnd - newStart);
         } else {
           onError();
         }
@@ -310,35 +310,38 @@ const Timeline = (function() {
         },
         stop: function(event, ui) {
           const dataDuration = target.data("duration");
+          const start = target.data("start");
           const newStart = ui.position.left / setting.cellWidth;
           const newEnd = +newStart + dataDuration;
-          Timeline.testHit(
-            parentRow,
-            newStart,
-            newEnd,
-            newStart => {
-              const left = ui.position.left - startLeft;
-              const hours = (left / setting.cellWidth) * 24;
-              const fromDate = new Date(target.data("from"));
+          if (start !== newStart) {
+            Timeline.testHit(
+              parentRow,
+              newStart,
+              newEnd,
+              newStart => {
+                const left = ui.position.left - startLeft;
+                const hours = (left / setting.cellWidth) * 24;
+                const fromDate = new Date(target.data("from"));
 
-              // TODO: TEST on MACOS
+                // TODO: TEST on MACOS
 
-              let time = dataDuration * 24 - 12;
+                let time = dataDuration * 24 - 12;
 
-              const newDate = moment(fromDate).add(hours, "hours");
+                const newDate = moment(fromDate).add(hours, "hours");
 
-              const endDate = moment(newDate).add(time, "hours");
+                const endDate = moment(newDate).add(time, "hours");
 
-              target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
-              target.data("start", newStart);
+                target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
+                target.data("start", newStart);
 
-              fromDateNode.html(newDate.format("DD.MM (A)"));
-              toDateNode.html(endDate.format("DD.MM (A)"));
-            },
-            () => {
-              target.css("left", startLeft);
-            }
-          );
+                fromDateNode.html(newDate.format("DD.MM (A)"));
+                toDateNode.html(endDate.format("DD.MM (A)"));
+              },
+              () => {
+                target.css("left", startLeft);
+              }
+            );
+          }
           parentRow.removeClass("row-interact");
           target.removeClass("is-open");
           target.removeClass("js_current-interact");
@@ -366,38 +369,32 @@ const Timeline = (function() {
         stop: function(event, ui) {
           const dataDuration = +target.data("duration");
           const start = +target.data("start");
-          const newEnd =
-            start +
-            dataDuration +
-            (ui.size.width - startSize) / setting.cellWidth;
-          const newDuration = newEnd - start;
+          const end = start + dataDuration;
+          const newEnd = end + (ui.size.width - startSize) / setting.cellWidth;
+          if (newEnd !== end) {
+            Timeline.testHitResize(
+              parentRow,
+              start,
+              newEnd,
+              newDuration => {
+                const fromDate = new Date(target.data("from"));
+                // TODO: TEST on MACOS
+                let time = newDuration * 24 - 12;
 
-          Timeline.testHitResize(
-            parentRow,
-            newEnd,
-            newDuration,
-            newDuration => {
-              const fromDate = new Date(target.data("from"));
-              // TODO: TEST on MACOS
-              let time = newDuration * 24 - 12;
+                const endDate = moment(fromDate).add(time, "hours");
 
-              const endDate = moment(fromDate).add(time, "hours");
-              console.log(endDate);
-
-              // target.data("duration", newStart);
-
-              // toDateNode.html(endDate.format("DD.MM (A)"));
-            },
-            () => {
-              // target.css("left", startLeft);
-            }
-          );
+                target.data("duration", newDuration);
+                target.css("width", newDuration * setting.cellWidth);
+                toDateNode.html(endDate.format("DD.MM (A)"));
+              },
+              () => {
+                target.css("width", startSize);
+              }
+            );
+          }
           target.removeClass("is-resized");
           parentRow.removeClass("row-interact");
           target.removeClass("js_current-interact");
-          target.removeClass("is-open");
-
-          // const newEnd = +newStart + dataDuration;
         }
       });
     },
