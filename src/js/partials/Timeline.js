@@ -200,6 +200,7 @@ const Timeline = (function() {
 
         const actions = $(".js_timeline-action");
         actions.removeClass("is-open");
+
         _this.toggleClass("is-open");
       });
       $(".js_add-prev-day").click(function() {
@@ -257,8 +258,9 @@ const Timeline = (function() {
       if (errorsCount > 0) {
         onError();
       } else {
+        const newDuration = newEnd - newStart;
         if (confirm("Are you sure?")) {
-          onSuccess(newEnd - newStart);
+          onSuccess(newDuration);
         } else {
           onError();
         }
@@ -343,7 +345,7 @@ const Timeline = (function() {
             );
           }
           parentRow.removeClass("row-interact");
-          target.removeClass("is-open");
+          // target.removeClass("is-open");
           target.removeClass("js_current-interact");
         }
       });
