@@ -1,4 +1,5 @@
 import $ from "jquery";
+
 const Timeline = (function() {
   "use strict";
   let setting = {
@@ -99,8 +100,10 @@ const Timeline = (function() {
     },
 
     getRowActions: function(row, rowId, actionsTemplate, actionsAttrs) {
-      const actionsHTML = row.actions
-        .map(action => {
+      const actionsHTML = Object.keys(row.actions)
+        .map(currentKey => {
+          const action = row.actions[currentKey];
+
           const from = moment(action.dates[0]);
           const to = moment(action.dates[1]);
 
@@ -115,7 +118,7 @@ const Timeline = (function() {
 
           const maxWidth = duration * setting.cellWidth;
 
-          let data = `data-start="${start}" data-duration="${duration}" data-from="${from.format(
+          let data = `data-action-id="${currentKey}" data-start="${start}" data-duration="${duration}" data-from="${from.format(
             "YYYY-MM-DDTHH:mm:ss"
           )}"`;
 
@@ -165,11 +168,13 @@ const Timeline = (function() {
       const datesRow = Timeline.getDatesRow(datesArray);
       tableBodyHTML += datesRow;
 
-      data.map((item, id) => {
-        const rowID = item.id;
-        tableLeftHTML += `<div class="timeline__row" data-row-id="${
-          item.id
-        }">${titlesTemplate(item)}</div>`;
+      Object.keys(data).map((index, id) => {
+        const item = data[index];
+
+        tableLeftHTML += `<div class="timeline__row" data-row-id="${index}">${titlesTemplate(
+          item,
+          index
+        )}</div>`;
 
         const actionsHTML = Timeline.getRowActions(
           item,
@@ -177,8 +182,8 @@ const Timeline = (function() {
           actionsTemplate,
           actionsAttrs
         );
-        tableBodyHTML += Timeline.getRow(datesArray, actionsHTML, rowID);
-        itemNewActions += `<div class="timeline__row" data-row-id="${rowID}"><div class="timeline__new-action" data-id="${rowID}">
+        tableBodyHTML += Timeline.getRow(datesArray, actionsHTML, index);
+        itemNewActions += `<div class="timeline__row" data-row-id="${index}"><div class="timeline__new-action" data-id="${index}">
         ${actionTemplate(item)}
         </div></div>`;
       });
@@ -297,6 +302,8 @@ const Timeline = (function() {
       let fromDateNode, toDateNode;
       let parentRow = "";
       let target = "";
+      let actionID = "";
+      let parentRowID = "";
 
       $(selector).draggable({
         axis: "x",
@@ -305,9 +312,11 @@ const Timeline = (function() {
           startLeft = ui.position.left;
           target = $(event.target);
           parentRow = target.closest("[data-row-id]");
+          actionID = target.data("action-id");
           fromDateNode = target.find(".js_from-date");
           toDateNode = target.find(".js_to-date");
           parentRow.addClass("row-interact");
+          parentRowID = parentRow.data("row-id");
           target.addClass("js_current-interact");
         },
         stop: function(event, ui) {
@@ -325,15 +334,20 @@ const Timeline = (function() {
                 const hours = (left / setting.cellWidth) * 24;
                 const fromDate = new Date(target.data("from"));
 
-                // TODO: TEST on MACOS
-
                 let time = dataDuration * 24 - 12;
 
                 const newDate = moment(fromDate).add(hours, "hours");
+                const newDateFormat = newDate.format("YYYY-MM-DDTHH:mm:ss");
 
                 const endDate = moment(newDate).add(time, "hours");
+                const endDateFormat = endDate.format("YYYY-MM-DDTHH:mm:ss");
 
-                target.data("from", newDate.format("YYYY-MM-DDTHH:mm:ss"));
+                const newKeyValue = [newDateFormat, endDateFormat];
+                setting.source[parentRowID].actions[
+                  actionID
+                ].dates = newKeyValue;
+
+                target.data("from", newDateFormat);
                 target.data("start", newStart);
 
                 fromDateNode.html(newDate.format("DD.MM (A)"));
@@ -356,13 +370,17 @@ const Timeline = (function() {
       let toDateNode;
       let parentRow = "";
       let startSize = 0;
+      let actionID = "";
+      let parentRowID = "";
       $(selector).resizable({
         handles: "e",
         grid: setting.cellWidth / 2,
         start: function(event, ui) {
           target = $(event.target);
+          actionID = target.data("action-id");
           toDateNode = target.find(".js_to-date");
           parentRow = target.closest("[data-row-id]");
+          parentRowID = parentRow.data("row-id");
           parentRow.addClass("row-interact");
           target.addClass("is-resized");
           target.addClass("js_current-interact");
@@ -380,11 +398,14 @@ const Timeline = (function() {
               newEnd,
               newDuration => {
                 const fromDate = new Date(target.data("from"));
-                // TODO: TEST on MACOS
+
                 let time = newDuration * 24 - 12;
 
                 const endDate = moment(fromDate).add(time, "hours");
-
+                const endDateFormat = endDate.format("YYYY-MM-DDTHH:mm:ss");
+                setting.source[parentRowID].actions[
+                  actionID
+                ].dates[1] = endDateFormat;
                 target.data("duration", newDuration);
                 target.css("width", newDuration * setting.cellWidth);
                 toDateNode.html(endDate.format("DD.MM (A)"));
@@ -406,7 +427,7 @@ const Timeline = (function() {
 
       const { source, render, place } = setting;
 
-      const { rowHead, rowAction, actionTemplate } = render;
+      const { rowHead, rowAction, addActionTemplate } = render;
 
       Timeline.renderTable(
         place,
@@ -414,7 +435,7 @@ const Timeline = (function() {
         dates,
         rowHead,
         rowAction,
-        actionTemplate
+        addActionTemplate
       );
       Timeline.hoverRowEvent();
       Timeline.dragEvents(".js_timeline-action");
@@ -428,7 +449,7 @@ const Timeline = (function() {
 
       const { source, render, place } = setting;
 
-      const { rowHead, rowAction, actionTemplate } = render;
+      const { rowHead, rowAction, addActionTemplate } = render;
 
       Timeline.renderTable(
         place,
@@ -436,7 +457,7 @@ const Timeline = (function() {
         dates,
         rowHead,
         rowAction,
-        actionTemplate
+        addActionTemplate
       );
 
       Timeline.events();
