@@ -256,16 +256,16 @@ $(document).ready(function() {
   Timeline.init({
     source: carsArray,
     place: $("#timelines"),
-    cellWidth: 100,
+    cellWidth: 80,
     showItems: 3,
     render: {
       rowHead: {
         template: function(row, id) {
-          return `<div><b class="bold mb-5">${
-            row.title
-          }</b><br/>ID - ${id}</div>`;
+          const title = row.title;
+          return `<div><b class="bold mb-5">${title}</b><br/><span class="light">ID - ${id}</span></div><button class="add-action js_add-action" title="Add action for ${title}">+ Add Action</button>`;
         }
       },
+
       rowAction: {
         //Attributes for timeline__action from type field
         // $ - replace to row index
@@ -283,11 +283,6 @@ $(document).ready(function() {
             : "";
           return `<b class="bold">${title}</b><div class="dates">From: <span class="js_from-date">${from}</span><br/>To: <span class="js_to-date">${to}</span></div>${priceHTML}`;
         }
-      },
-      addActionTemplate: function(row) {
-        const title = row.title;
-
-        return `<button class="add-action js_add-action" title="${title}"></button>`;
       }
     }
   });

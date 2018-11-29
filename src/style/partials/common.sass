@@ -10,20 +10,28 @@ body
 	&::before
 		display: block
 
-$borderColor: #ececec
+
+$color-brand: #3384ff
+$color-success: #6fbf1f
+$color-warning: #ff9d21
+$borderColor: #ebebeb
 $borderWeight: 2px
 $border: $borderWeight solid $borderColor
-$borderLight: 1px solid $borderColor
+$borderLight: 2px solid $borderColor
 
-$f-line-back: white
-$s-line-back: #fbfbfb
+$active-line-back: #f9f9fc
 
 $on-drag-color: rgba(0, 231, 255, 0.3)
 
 $on-drag-border-color: darken($on-drag-color, 10%)
 
-$headRowHeight: 40px
+$baseTextColor: #5d5b6f
+$lightTextColor: #adabc1
+
+
+$headRowHeight: 38px
 .timeline
+	color: $baseTextColor
 	.ui-resizable-e
 		width: 25px
 		right: 0
@@ -51,45 +59,47 @@ $headRowHeight: 40px
 		flex-shrink: 0
 		position: relative
 		z-index: 10
-		width: 200px
-		background: white
+		width: 185px
+		background: $active-line-back
 		padding-top: $headRowHeight
-		box-shadow: 1px 0 8px 0px rgba(0, 0, 0, 0.15)
+		box-shadow: 1px 0 11px 4px rgba(0, 0, 0, 0.1)
 		.timeline__row
 			display: flex
 			align-items: center
 			justify-content: center
 			text-align: center
+			background: white
 			border-bottom: $border
-			&:nth-of-type(odd)
-				background: $f-line-back
-			&:nth-of-type(even)
-				background: $s-line-back
 			&:first-of-type
 				border-top: $border
 			&:last-of-type
 				border-bottom: none
-	&__right
-		flex-shrink: 0
-		width: 50px
-		position: relative
-		background: white
-		padding-top: $headRowHeight
-		box-shadow: -1px 0 8px 0px rgba(0, 0, 0, 0.15)
-		.timeline__row
-			display: flex
-			align-items: center
-			justify-content: center
-			text-align: center
-			border-bottom: $border
-			&:nth-of-type(odd)
-				background: $f-line-back
-			&:nth-of-type(even)
-				background: $s-line-back
-			&:last-of-type
-				border-bottom: none
-			&:first-of-type
-				border-top: $border
+			
+
+		.light
+			color: $lightTextColor
+
+	.add-action
+		display: none
+		position: absolute
+		left: 0
+		right: 0
+		top: 0
+		bottom: 0
+		border: none
+		width: 100%
+		height: 100%
+		color: white
+		font-size: 16px
+		font-weight: 500
+		letter-spacing: 0.2px
+		color: $lightTextColor
+		cursor: pointer
+		background: transparentize($active-line-back, .2)
+		transition: all .3s
+		&:hover
+			background: transparentize($color-brand, .2)
+			color: white
 
 	&__body
 		overflow-x: auto
@@ -98,16 +108,16 @@ $headRowHeight: 40px
 		overflow: hidden
 	&__row
 		position: relative
-		height: 50px
+		height: 66px
 		display: flex
 		transition: background .3s
 		&:last-of-type
 			.timeline__cell
 				border-bottom: none
-		&:nth-of-type(odd)
-			background: $s-line-back
 		&.is-active
-			background: darken($s-line-back, 2%) !important
+			background: $active-line-back !important
+			.add-action
+				display: block
 		&.row-interact
 			background: $on-drag-color !important
 			.timeline__cell
@@ -127,7 +137,10 @@ $headRowHeight: 40px
 				transform: translateX(-50%)
 	&__row-head
 		height: $headRowHeight
+		background: $active-line-back
 		display: flex
+		position: relative
+		z-index: 1
 		.timeline__cell
 			display: flex
 			align-items: center
@@ -175,7 +188,8 @@ $headRowHeight: 40px
 		justify-content: center
 	&__action-wrap
 		position: absolute
-		top: 5px
+		top: 50%
+		transform: translateY(-50%)
 		height: 40px
 		z-index: 9
 		&.is-open:not(.js_current-interact)
@@ -218,17 +232,17 @@ $headRowHeight: 40px
 			align-items: center
 
 .success
-	background: linear-gradient(45deg, #0c91a0, #21d6c3)
+	background: $color-success
 	color: white
 
 
 .warning
-	background: linear-gradient(45deg, #de7d18, #ffd100)
+	background: $color-warning
 	color: white
 
 
 .brand
-	background: linear-gradient(45deg, #6d31cf, #3482fe)
+	background: $color-brand
 	color: white
 
 .bold
@@ -262,36 +276,3 @@ $headRowHeight: 40px
 		background: #3482fe
 		color: white 
 
-
-.add-action
-	width: 30px
-	height: 30px
-	line-height: 36px
-	border-radius: 50%
-	background: none
-	font-weight: bold
-	color: #7427ca
-	border: 1px solid currentColor
-	outline: none
-	cursor: pointer
-	+unselectable
-	transition: background .3s
-	position: relative
-	opacity: .6
-	&::before, &::after
-		content: ''
-		position: absolute
-		top: 50%
-		left: 50%
-		transform: translate(-50%, -50%)
-		background: currentColor
-	&::before
-		width: 10px
-		height: 2px
-	&::after
-		width: 2px
-		height: 10px
-	&:hover
-		background: transparentize(#7427ca, .6)
-		&::before, &::after
-			color: white

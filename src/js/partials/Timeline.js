@@ -53,11 +53,11 @@ const Timeline = (function() {
       let rowHead = '<div class="timeline__row-head">';
       const cellWidth = setting.cellWidth - 2;
       for (let i = 0; i < datesArray.length; i++) {
-        const cellDay = `<div class="timeline__cell" style="width:${cellWidth}px"><div class="timeline__cell-inner"><b>${moment(
-          datesArray[i]
-        ).format("DD.MM")}</b><br>${moment(datesArray[i]).format(
-          "ddd"
-        )}</div></div>`;
+        const cellDay = `<div class="timeline__cell" style="width:${cellWidth}px"><div class="timeline__cell-inner">
+        <b>&nbsp;${moment(datesArray[i]).format("ddd")}</b>
+        ${moment(datesArray[i]).format("DD.MM")}
+        </div>
+        </div>`;
 
         rowHead += cellDay;
       }
@@ -151,14 +151,7 @@ const Timeline = (function() {
         .join("");
       return actionsHTML;
     },
-    renderTable: function(
-      place,
-      data,
-      datesArray,
-      rowHead,
-      rowAction,
-      actionTemplate
-    ) {
+    renderTable: function(place, data, datesArray, rowHead, rowAction) {
       const titlesTemplate = rowHead.template;
       const actionsTemplate = rowAction.template;
       const actionsAttrs = rowAction.attrsForType;
@@ -166,7 +159,6 @@ const Timeline = (function() {
       let tableLeftHTML = "";
       let tableBodyHTML = "";
       let tableHTML = "";
-      let itemNewActions = "";
 
       const datesRow = Timeline.getDatesRow(datesArray);
       tableBodyHTML += datesRow;
@@ -186,16 +178,13 @@ const Timeline = (function() {
           actionsAttrs
         );
         tableBodyHTML += Timeline.getRow(datesArray, actionsHTML, index);
-        itemNewActions += `<div class="timeline__row" data-row-id="${index}"><div class="timeline__new-action" data-id="${index}">
-        ${actionTemplate(item)}
-        </div></div>`;
       });
 
       // tableBodyHTML += datesRow;
 
       tableHTML =
         `<div class="timeline__left">${tableLeftHTML}</div>` +
-        `<div class="timeline__body"><div class="timeline__body-wrap" style="width:${rowWidth}px">${tableBodyHTML}</div></div><div class="timeline__right">${itemNewActions}</div>`;
+        `<div class="timeline__body"><div class="timeline__body-wrap" style="width:${rowWidth}px">${tableBodyHTML}</div></div>`;
 
       place.html(tableHTML);
     },
@@ -251,7 +240,6 @@ const Timeline = (function() {
 
         const val = _this.val();
         setting.showItems = +val;
-        sourceArr = Timeline.sliceObject(source, setting.showItems);
 
         Timeline.reinit();
       });
@@ -441,6 +429,7 @@ const Timeline = (function() {
     },
 
     reinit: function() {
+      sourceArr = Timeline.sliceObject(source, setting.showItems);
       Timeline.renderTimelines(
         place,
         rowHead,
@@ -510,8 +499,7 @@ const Timeline = (function() {
           sourceArr[i],
           dates,
           rowHead,
-          rowAction,
-          addActionTemplate
+          rowAction
         );
       }
       place.append(Timeline.getPagination(sourceArr.length));
