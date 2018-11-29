@@ -128,6 +128,30 @@ const carsArray = {
         cost: "500$"
       }
     }
+  },
+  "31212341": {
+    title: "BMW M6",
+
+    actions: {
+      "130": {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      "131": {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      "132": {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    }
   }
 };
 $(document).ready(function() {
@@ -135,8 +159,9 @@ $(document).ready(function() {
 
   Timeline.init({
     source: carsArray,
-    place: $("#timeline-wrap"),
+    place: $("#timelines"),
     cellWidth: 100,
+    showItems: 3,
     render: {
       rowHead: {
         template: function(row, id) {

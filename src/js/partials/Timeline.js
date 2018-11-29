@@ -9,8 +9,10 @@ const Timeline = (function() {
     rows: [],
     daysBefore: 5,
     viewDates: 15,
+    showItems: 3,
     now: moment(new Date().setHours(0, 0, 0, 0))._d
   };
+  let sourceArr = [];
   return {
     extendObject: function(obj, src) {
       for (var key in src) {
@@ -188,7 +190,7 @@ const Timeline = (function() {
         </div></div>`;
       });
 
-      tableBodyHTML += datesRow;
+      // tableBodyHTML += datesRow;
 
       tableHTML =
         `<div class="timeline__left">${tableLeftHTML}</div>` +
@@ -207,6 +209,11 @@ const Timeline = (function() {
         actions.removeClass("is-open");
 
         _this.toggleClass("is-open");
+      });
+      $(document).on("click", ".js_pagination-btn", function() {
+        const _this = $(this);
+        const dataID = _this.data("target-id");
+        Timeline.showActiveTimeline(dataID);
       });
       $(".js_add-prev-day").click(function() {
         setting.daysBefore += 1;
@@ -423,43 +430,99 @@ const Timeline = (function() {
     },
 
     reinit: function() {
-      const dates = this.getDaysArray();
-
-      const { source, render, place } = setting;
+      const { render, place } = setting;
 
       const { rowHead, rowAction, addActionTemplate } = render;
 
-      Timeline.renderTable(
+      Timeline.renderTimelines(
         place,
-        source,
-        dates,
         rowHead,
         rowAction,
-        addActionTemplate
+        addActionTemplate,
+        sourceArr
       );
+
+      Timeline.showActiveTimeline(0);
+
       Timeline.hoverRowEvent();
       Timeline.dragEvents(".js_timeline-action");
       Timeline.resizeEvents(".js_timeline-action");
+    },
+    sliceObject: function(obj, showItems) {
+      const sourceKeys = Object.keys(obj);
+      const sourceLength = sourceKeys.length;
+      const tablesCount = Math.ceil(sourceLength / showItems);
+      const result = [];
+      let partIndex = 0;
+      for (let i = 0; i < tablesCount; i++) {
+        const part = sourceKeys.slice(partIndex, partIndex + showItems);
+        const tempArr = [];
+        for (let j = 0; j < part.length; j++) {
+          const key = part[j];
+          const objItem = `"${key}":${JSON.stringify(obj[key])}`;
+          tempArr.push(objItem);
+        }
+        result.push(JSON.parse(`{${tempArr.join()}}`));
+
+        partIndex += showItems;
+      }
+      return result;
+    },
+    renderTimelines: function(
+      place,
+      rowHead,
+      rowAction,
+      addActionTemplate,
+      sourceArr
+    ) {
+      place.empty();
+      const dates = this.getDaysArray();
+
+      let pagination = $("<ul class='timeline__nav'></ul>");
+      for (let i = 0; i < sourceArr.length; i++) {
+        const timelineItem = $(
+          `<div class="timeline" id="timeline-wrap-${i}">`
+        );
+        place.append(timelineItem);
+
+        Timeline.renderTable(
+          timelineItem,
+          sourceArr[i],
+          dates,
+          rowHead,
+          rowAction,
+          addActionTemplate
+        );
+        pagination.append(
+          `<li class="timeline__nav-item"><button class="js_pagination-btn timeline__nav-btn" data-target-id="${i}">${i +
+            1}</button></li>`
+        );
+      }
+      place.append(pagination);
+    },
+    showActiveTimeline: function(index) {
+      $(".timeline").css("display", "none");
+      $(`#timeline-wrap-${index}`).css("display", "");
     },
     init: function(props) {
       if (props) {
         setting = Timeline.extendObject(setting, props);
       }
-      const dates = this.getDaysArray();
 
       const { source, render, place } = setting;
 
       const { rowHead, rowAction, addActionTemplate } = render;
 
-      Timeline.renderTable(
+      sourceArr = Timeline.sliceObject(source, setting.showItems);
+
+      Timeline.renderTimelines(
         place,
-        source,
-        dates,
         rowHead,
         rowAction,
-        addActionTemplate
+        addActionTemplate,
+        sourceArr
       );
-
+      Timeline.showActiveTimeline(0);
       Timeline.events();
 
       Timeline.hoverRowEvent();
