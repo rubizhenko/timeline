@@ -152,6 +152,102 @@ const carsArray = {
         cost: "500$"
       }
     }
+  },
+  "322123": {
+    title: "BMW M6",
+
+    actions: {
+      "130": {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      "131": {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      "132": {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    }
+  },
+  "312121235341": {
+    title: "BMW M6",
+
+    actions: {
+      "130": {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      "131": {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      "132": {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    }
+  },
+  "312313": {
+    title: "BMW M6",
+
+    actions: {
+      "130": {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      "131": {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      "132": {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    }
+  },
+  "312123123": {
+    title: "BMW M6",
+
+    actions: {
+      "130": {
+        type: 1,
+        title: "Car rent",
+        dates: ["2018-11-22T15:40:00", "2018-11-25T15:40:00"],
+        cost: "124$"
+      },
+      "131": {
+        type: 2,
+        title: "Car repair",
+        dates: ["2018-11-26T15:40:00", "2018-11-30T15:40:00"],
+        cost: ""
+      },
+      "132": {
+        type: 3,
+        title: "Car check",
+        dates: ["2018-12-01T15:40:00", "2018-12-02T15:40:00"],
+        cost: "500$"
+      }
+    }
   }
 };
 $(document).ready(function() {
@@ -190,8 +286,8 @@ $(document).ready(function() {
       },
       addActionTemplate: function(row) {
         const title = row.title;
-        const id = row.id;
-        return `<button class="add-action js_add-action" title="${title} - ${id}"></button>`;
+
+        return `<button class="add-action js_add-action" title="${title}"></button>`;
       }
     }
   });

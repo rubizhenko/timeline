@@ -13,6 +13,7 @@ const Timeline = (function() {
     now: moment(new Date().setHours(0, 0, 0, 0))._d
   };
   let sourceArr = [];
+  let rowHead, rowAction, addActionTemplate, source, render, place;
   return {
     extendObject: function(obj, src) {
       for (var key in src) {
@@ -244,6 +245,16 @@ const Timeline = (function() {
           actions.removeClass("left-vis");
         }
       });
+
+      $("#js_timeline-shows").change(function() {
+        const _this = $(this);
+
+        const val = _this.val();
+        setting.showItems = +val;
+        sourceArr = Timeline.sliceObject(source, setting.showItems);
+
+        Timeline.reinit();
+      });
     },
     hoverRowEvent: function() {
       $("[data-row-id]").hover(
@@ -430,10 +441,6 @@ const Timeline = (function() {
     },
 
     reinit: function() {
-      const { render, place } = setting;
-
-      const { rowHead, rowAction, addActionTemplate } = render;
-
       Timeline.renderTimelines(
         place,
         rowHead,
@@ -452,10 +459,12 @@ const Timeline = (function() {
       const sourceKeys = Object.keys(obj);
       const sourceLength = sourceKeys.length;
       const tablesCount = Math.ceil(sourceLength / showItems);
+
       const result = [];
       let partIndex = 0;
       for (let i = 0; i < tablesCount; i++) {
         const part = sourceKeys.slice(partIndex, partIndex + showItems);
+
         const tempArr = [];
         for (let j = 0; j < part.length; j++) {
           const key = part[j];
@@ -468,6 +477,18 @@ const Timeline = (function() {
       }
       return result;
     },
+    getPagination: function(count) {
+      if (count <= 1) {
+        return;
+      }
+      let pagination = "<ul class='timeline__nav'>";
+      for (let i = 0; i < count; i++) {
+        pagination += `<li class="timeline__nav-item"><button class="js_pagination-btn timeline__nav-btn" data-target-id="${i}">${i +
+          1}</button></li>`;
+      }
+      pagination += "</ul>";
+      return pagination;
+    },
     renderTimelines: function(
       place,
       rowHead,
@@ -478,7 +499,6 @@ const Timeline = (function() {
       place.empty();
       const dates = this.getDaysArray();
 
-      let pagination = $("<ul class='timeline__nav'></ul>");
       for (let i = 0; i < sourceArr.length; i++) {
         const timelineItem = $(
           `<div class="timeline" id="timeline-wrap-${i}">`
@@ -493,12 +513,8 @@ const Timeline = (function() {
           rowAction,
           addActionTemplate
         );
-        pagination.append(
-          `<li class="timeline__nav-item"><button class="js_pagination-btn timeline__nav-btn" data-target-id="${i}">${i +
-            1}</button></li>`
-        );
       }
-      place.append(pagination);
+      place.append(Timeline.getPagination(sourceArr.length));
     },
     showActiveTimeline: function(index) {
       $(".timeline").css("display", "none");
@@ -509,9 +525,9 @@ const Timeline = (function() {
         setting = Timeline.extendObject(setting, props);
       }
 
-      const { source, render, place } = setting;
+      ({ source, render, place } = setting);
 
-      const { rowHead, rowAction, addActionTemplate } = render;
+      ({ rowHead, rowAction, addActionTemplate } = render);
 
       sourceArr = Timeline.sliceObject(source, setting.showItems);
 

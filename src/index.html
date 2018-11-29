@@ -12,15 +12,24 @@
 <body>
   <!--=include template/header.html -->
 
-  <div class="controls">
-    <button class="btn-control js_add-prev-day">&lt;&lt;</button>
-    <button class="btn-control js_week1">1 Week</button>
-    <button class="btn-control js_week2">2 Weeks</button>
-    <button class="btn-control js_month">Month</button>
-    <button class="btn-control js_remove-prev-day">&gt;&gt;</button>
+  <div class="container">
+    <div class="controls">
+      <button class="btn-control js_add-prev-day">&lt;&lt;</button>
+      <button class="btn-control js_week1">1 Week</button>
+      <button class="btn-control js_week2">2 Weeks</button>
+      <button class="btn-control js_month">Month</button>
+      <button class="btn-control js_remove-prev-day">&gt;&gt;</button>
+    </div>
+    <div class="timelines" id="timelines"></div>
+    <select name="count" class="timeline__shows" id="js_timeline-shows">
+      <option value="1">1</option>
+      <option value="3" selected>3</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
   </div>
-  <div class="timelines" id="timelines"></div>
-
   <!--=include template/footer.html -->
 
   <!--=require img/svg/symbols.svg -->
